@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">示波器校准仪电源原理图关键链路总览</title>
+  <desc id="desc">按原理图功能块整理的电源总链路，包括24V输入、辅助电源、±310V母线和±300V分立LDO输出。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fffaf5"/>
+      <stop offset="100%" stop-color="#f4f7ff"/>
+    </linearGradient>
+    <linearGradient id="pink" x1="0" x2="1">
+      <stop offset="0%" stop-color="#f97393"/>
+      <stop offset="100%" stop-color="#fb7185"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" x2="1">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="mint" x1="0" x2="1">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#94a3b8" flood-opacity="0.24"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="760" fill="url(#bg)"/>
+  <text x="72" y="82" fill="#0f172a" font-size="36" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif" font-weight="700">
+    原理图关键链路总览
+  </text>
+  <text x="72" y="122" fill="#475569" font-size="20" font-family="'Microsoft YaHei', 'PingFang SC', sans-serif">
+    按原理图网名和功能块整理：24V 输入先建立辅助低压和 ±310V 母线，再通过分立 LDO 收敛到 ±300V。
+  </text>
+
+  <g filter="url(#shadow)">
+    <rect x="80" y="210" rx="28" ry="28" width="220" height="150" fill="#ffffff"/>
+    <rect x="80" y="210" rx="28" ry="28" width="220" height="14" fill="url(#pink)"/>
+    <text x="110" y="275" fill="#0f172a" font-size="34" font-family="'Microsoft YaHei', sans-serif" font-weight="700">24V 输入</text>
+    <text x="110" y="320" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">+24V / PGND</text>
+    <text x="110" y="352" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">整板功率入口</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="380" y="150" rx="30" ry="30" width="320" height="180" fill="#ffffff"/>
+    <rect x="380" y="150" rx="30" ry="30" width="320" height="14" fill="url(#blue)"/>
+    <text x="414" y="215" fill="#0f172a" font-size="30" font-family="'Microsoft YaHei', sans-serif" font-weight="700">辅助电源</text>
+    <text x="414" y="255" fill="#334155" font-size="22" font-family="'Microsoft YaHei', sans-serif">DC24VToDC12V</text>
+    <text x="414" y="292" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">TPS7A3901DSCR</text>
+    <text x="414" y="324" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">输出：+12V / -12V / 5V / EN</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="380" y="400" rx="30" ry="30" width="320" height="220" fill="#ffffff"/>
+    <rect x="380" y="400" rx="30" ry="30" width="320" height="14" fill="url(#pink)"/>
+    <text x="414" y="468" fill="#0f172a" font-size="30" font-family="'Microsoft YaHei', sans-serif" font-weight="700">前级高压建立</text>
+    <text x="414" y="508" fill="#334155" font-size="22" font-family="'Microsoft YaHei', sans-serif">DC24VToDC310V</text>
+    <text x="414" y="542" fill="#334155" font-size="22" font-family="'Microsoft YaHei', sans-serif">DC24VToDC-310V</text>
+    <text x="414" y="578" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">6.8uH / 300kHz</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="800" y="210" rx="32" ry="32" width="240" height="160" fill="#ffffff"/>
+    <rect x="800" y="210" rx="32" ry="32" width="240" height="14" fill="url(#blue)"/>
+    <text x="830" y="275" fill="#0f172a" font-size="30" font-family="'Microsoft YaHei', sans-serif" font-weight="700">±310V 母线</text>
+    <text x="830" y="320" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">+310VIN / -310VIN</text>
+    <text x="830" y="352" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">给后级 LDO 留 10V 余量</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1110" y="160" rx="30" ry="30" width="220" height="270" fill="#ffffff"/>
+    <rect x="1110" y="160" rx="30" ry="30" width="220" height="14" fill="url(#mint)"/>
+    <text x="1140" y="225" fill="#0f172a" font-size="30" font-family="'Microsoft YaHei', sans-serif" font-weight="700">分立 LDO</text>
+    <text x="1140" y="265" fill="#334155" font-size="22" font-family="'Microsoft YaHei', sans-serif">DC310VToDC300V</text>
+    <text x="1140" y="299" fill="#334155" font-size="22" font-family="'Microsoft YaHei', sans-serif">DC-310VToDC-300V</text>
+    <text x="1140" y="340" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">REF5025AIDR</text>
+    <text x="1140" y="372" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">OPA2192 / ADA4622</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="1110" y="500" rx="28" ry="28" width="220" height="120" fill="#ffffff"/>
+    <rect x="1110" y="500" rx="28" ry="28" width="220" height="14" fill="url(#mint)"/>
+    <text x="1150" y="565" fill="#0f172a" font-size="34" font-family="'Microsoft YaHei', sans-serif" font-weight="700">±300V 输出</text>
+    <text x="1150" y="604" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">供高压运放</text>
+  </g>
+
+  <path d="M300 285 H360" stroke="#475569" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M300 285 C335 285 340 490 360 510" stroke="#475569" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M700 240 H780" stroke="#475569" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M700 510 C770 510 750 330 780 330" stroke="#475569" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M1040 290 H1090" stroke="#475569" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M1220 430 V480" stroke="#475569" stroke-width="5" fill="none" marker-end="url(#arrow)"/>
+
+  <text x="720" y="214" fill="#64748b" font-size="18" font-family="'Microsoft YaHei', sans-serif">低压控制与参考供电</text>
+  <text x="716" y="478" fill="#64748b" font-size="18" font-family="'Microsoft YaHei', sans-serif">建立高压母线</text>
+  <text x="1096" y="470" fill="#64748b" font-size="18" font-family="'Microsoft YaHei', sans-serif">高 PSRR 最后一级净化</text>
+</svg>

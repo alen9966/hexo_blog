@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">示波器校准仪电源辅助电源关键部分</title>
+  <desc id="desc">按原理图梳理的辅助电源部分，展示24V到双极性低压和控制参考的关系。</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f8fbff"/>
+      <stop offset="100%" stop-color="#fff8fb"/>
+    </linearGradient>
+    <linearGradient id="blue2" x1="0" x2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="mint2" x1="0" x2="1">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#14b8a6"/>
+    </linearGradient>
+    <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#94a3b8" flood-opacity="0.22"/>
+    </filter>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="760" fill="url(#bg2)"/>
+  <text x="70" y="80" fill="#0f172a" font-size="36" font-family="'Microsoft YaHei', sans-serif" font-weight="700">辅助电源关键部分</text>
+  <text x="70" y="118" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">原理图里能确认有独立双极性低压和控制接口，这部分决定后面高压闭环能不能正常工作。</text>
+
+  <g filter="url(#shadow2)">
+    <rect x="90" y="250" width="220" height="150" rx="28" ry="28" fill="#ffffff"/>
+    <rect x="90" y="250" width="220" height="14" rx="28" ry="28" fill="url(#blue2)"/>
+    <text x="122" y="315" fill="#0f172a" font-size="32" font-family="'Microsoft YaHei', sans-serif" font-weight="700">24V 输入</text>
+    <text x="122" y="355" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">DC24VIN / PGND</text>
+  </g>
+
+  <g filter="url(#shadow2)">
+    <rect x="390" y="210" width="320" height="230" rx="30" ry="30" fill="#ffffff"/>
+    <rect x="390" y="210" width="320" height="14" rx="30" ry="30" fill="url(#blue2)"/>
+    <text x="426" y="276" fill="#0f172a" font-size="30" font-family="'Microsoft YaHei', sans-serif" font-weight="700">DC24VToDC12V</text>
+    <text x="426" y="318" fill="#334155" font-size="22" font-family="'Microsoft YaHei', sans-serif">TPS7A3901DSCR</text>
+    <text x="426" y="356" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">输出：+12VIN / -12VIN</text>
+    <text x="426" y="390" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">板上还引出 5V、EN、GND</text>
+  </g>
+
+  <g filter="url(#shadow2)">
+    <rect x="820" y="140" width="480" height="370" rx="32" ry="32" fill="#ffffff"/>
+    <rect x="820" y="140" width="480" height="14" rx="32" ry="32" fill="url(#mint2)"/>
+    <text x="860" y="205" fill="#0f172a" font-size="30" font-family="'Microsoft YaHei', sans-serif" font-weight="700">低压控制与参考区</text>
+    <text x="860" y="250" fill="#334155" font-size="22" font-family="'Microsoft YaHei', sans-serif">REF5025AIDR</text>
+    <text x="860" y="286" fill="#334155" font-size="22" font-family="'Microsoft YaHei', sans-serif">OPA2192IDR / ADA4622-2ARZ</text>
+    <text x="860" y="338" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">关键网络：</text>
+    <text x="900" y="374" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">VREFA / VREFB</text>
+    <text x="900" y="408" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">ENA / ENB / EN</text>
+    <text x="900" y="442" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">IPROGA / IPROGB</text>
+    <text x="900" y="476" fill="#475569" font-size="20" font-family="'Microsoft YaHei', sans-serif">VMONA / VMONB / IMONA / IMONB</text>
+  </g>
+
+  <path d="M310 325 H368" stroke="#475569" stroke-width="5" fill="none" marker-end="url(#arrow2)"/>
+  <path d="M710 325 H792" stroke="#475569" stroke-width="5" fill="none" marker-end="url(#arrow2)"/>
+
+  <text x="438" y="472" fill="#64748b" font-size="18" font-family="'Microsoft YaHei', sans-serif">先把运放、基准和监测链路供电站稳</text>
+  <text x="862" y="544" fill="#64748b" font-size="18" font-family="'Microsoft YaHei', sans-serif">调试时优先检查这一区域，再去看高压闭环</text>
+</svg>
