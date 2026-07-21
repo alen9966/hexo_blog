@@ -95,5 +95,5 @@ theme: Sakura
 # Deployment
 deploy:
   type: git
-  repository: https://github.com/alen9966/alen9966.github.io.git
+  repository: git@github.com:alen9966/alen9966.github.io.git
   branch: main
