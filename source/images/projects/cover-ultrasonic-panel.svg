@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="ultrasonic panel cover">
+  <defs>
+    <linearGradient id="panel-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d2430"/>
+      <stop offset="100%" stop-color="#47607c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" rx="36" fill="url(#panel-bg)"/>
+  <rect x="150" y="120" width="900" height="480" rx="28" fill="rgba(255,255,255,0.08)" stroke="#d9eeff" stroke-width="12"/>
+  <rect x="230" y="190" width="360" height="220" rx="18" fill="none" stroke="#8dd7ff" stroke-width="14"/>
+  <g fill="none" stroke="#d9eeff" stroke-width="12">
+    <circle cx="760" cy="230" r="44"/>
+    <circle cx="900" cy="230" r="44"/>
+    <circle cx="760" cy="370" r="44"/>
+    <circle cx="900" cy="370" r="44"/>
+    <rect x="700" y="470" width="260" height="74" rx="18"/>
+  </g>
+  <g fill="#fbbf24">
+    <circle cx="760" cy="230" r="12"/>
+    <circle cx="900" cy="230" r="12"/>
+    <circle cx="760" cy="370" r="12"/>
+    <circle cx="900" cy="370" r="12"/>
+  </g>
+  <g stroke="#8dd7ff" stroke-width="10" stroke-linecap="round">
+    <path d="M270 470h250"/>
+    <path d="M270 520h180"/>
+  </g>
+</svg>

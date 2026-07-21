@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="oscilloscope power cover">
+  <defs>
+    <linearGradient id="power-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e2435"/>
+      <stop offset="100%" stop-color="#0ea5a3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" rx="36" fill="url(#power-bg)"/>
+  <g fill="none" stroke="#d9eeff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M120 370h210l54-80 110 166 120-220 128 248 74-114h264"/>
+    <path d="M180 180h124v124H180z"/>
+    <path d="M896 150h154v90H896z"/>
+    <path d="M860 480h214v120H860z"/>
+  </g>
+  <g fill="#d9eeff">
+    <circle cx="120" cy="370" r="18"/>
+    <circle cx="1080" cy="370" r="18"/>
+  </g>
+  <g fill="#fbbf24">
+    <rect x="208" y="208" width="68" height="12" rx="6"/>
+    <rect x="236" y="180" width="12" height="68" rx="6"/>
+  </g>
+</svg>

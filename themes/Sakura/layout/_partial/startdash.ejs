@@ -1,0 +1,21 @@
+<div class="top-feature-row">
+  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
+  <i class="fa fa-anchor" aria-hidden="true">
+  </i>
+  当前项目</h1>
+  <% for (dash in theme.startdash) { %>
+  <div class="top-feature-v2">
+    <div class="the-feature square from_left_and_right">
+      <a href="<%- url_for(theme.startdash[dash].url) %>">
+        <div class="img">
+          <img src="<%- (theme.cdn || '') + theme.startdash[dash].img %>">
+        </div>
+        <div class="info">
+          <h3><%= theme.startdash[dash].title %></h3>
+          <p><%= theme.startdash[dash].desc %></p>
+        </div>
+      </a>
+    </div>
+  </div>
+  <% } %>
+</div>

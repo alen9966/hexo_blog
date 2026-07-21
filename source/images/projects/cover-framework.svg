@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="framework cover">
+  <defs>
+    <linearGradient id="framework-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d2238"/>
+      <stop offset="100%" stop-color="#1d5fd1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" rx="36" fill="url(#framework-bg)"/>
+  <g fill="#d9eeff" opacity="0.18">
+    <rect x="80" y="90" width="1040" height="540" rx="28"/>
+  </g>
+  <g fill="none" stroke="#d9eeff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="150" y="130" width="260" height="150" rx="24"/>
+    <rect x="470" y="130" width="260" height="150" rx="24"/>
+    <rect x="790" y="130" width="260" height="150" rx="24"/>
+    <rect x="310" y="420" width="260" height="150" rx="24"/>
+    <rect x="630" y="420" width="260" height="150" rx="24"/>
+    <path d="M410 205h60"/>
+    <path d="M730 205h60"/>
+    <path d="M520 280v140"/>
+    <path d="M680 280v140"/>
+  </g>
+  <g fill="#fbbf24">
+    <circle cx="410" cy="205" r="16"/>
+    <circle cx="730" cy="205" r="16"/>
+    <circle cx="520" cy="420" r="16"/>
+    <circle cx="680" cy="420" r="16"/>
+  </g>
+</svg>

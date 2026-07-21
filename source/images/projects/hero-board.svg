@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="project hero">
+  <defs>
+    <linearGradient id="hero-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#081a2f"/>
+      <stop offset="45%" stop-color="#10355d"/>
+      <stop offset="100%" stop-color="#1677ff"/>
+    </linearGradient>
+    <linearGradient id="trace-a" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8dd7ff"/>
+      <stop offset="100%" stop-color="#d9eeff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#hero-bg)"/>
+  <g opacity="0.18" stroke="#d9eeff" stroke-width="2">
+    <path d="M0 100h1600"/>
+    <path d="M0 220h1600"/>
+    <path d="M0 340h1600"/>
+    <path d="M0 460h1600"/>
+    <path d="M0 580h1600"/>
+    <path d="M0 700h1600"/>
+    <path d="M0 820h1600"/>
+    <path d="M120 0v900"/>
+    <path d="M320 0v900"/>
+    <path d="M520 0v900"/>
+    <path d="M720 0v900"/>
+    <path d="M920 0v900"/>
+    <path d="M1120 0v900"/>
+    <path d="M1320 0v900"/>
+    <path d="M1520 0v900"/>
+  </g>
+  <g fill="none" stroke="url(#trace-a)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M180 220h320l80 86h220"/>
+    <path d="M240 610h260l92-118h290l84-92h224"/>
+    <path d="M1020 220h180l96 110h148"/>
+    <path d="M940 690h164l80-84h220"/>
+    <path d="M560 770h220l60-66h144"/>
+  </g>
+  <g fill="#d9eeff">
+    <circle cx="180" cy="220" r="20"/>
+    <circle cx="800" cy="306" r="18"/>
+    <circle cx="240" cy="610" r="18"/>
+    <circle cx="966" cy="400" r="18"/>
+    <circle cx="1404" cy="720" r="18"/>
+    <circle cx="560" cy="770" r="18"/>
+  </g>
+  <g opacity="0.9">
+    <rect x="1040" y="120" width="280" height="140" rx="22" fill="rgba(255,255,255,0.10)"/>
+    <rect x="320" y="520" width="260" height="160" rx="22" fill="rgba(255,255,255,0.08)"/>
+    <rect x="760" y="560" width="220" height="120" rx="18" fill="rgba(255,255,255,0.08)"/>
+  </g>
+</svg>

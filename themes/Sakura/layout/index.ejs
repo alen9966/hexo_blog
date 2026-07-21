@@ -1,0 +1,22 @@
+<div class="blank" style="padding-top: 0;"></div>
+<div id="content" class="site-content">
+    <% if (theme.notice) { %>
+        <div class="notice" style="margin-top:24px">
+            <i class="iconfont icon-notification">
+            </i>
+            <div class="notice-content"><%= theme.notice %></div>
+        </div>
+    <% } %>
+    <%- partial('_partial/startdash') %>
+    <div id="primary" class="content-area">
+        <main id="main" class="site-main" role="main">
+            <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
+                <i class="fa fa-microchip" aria-hidden="true"></i>
+                项目记录</h1>
+            <%- partial('_partial/archive', {pagination: 2, index: true}) %>
+        </main>
+    </div>
+    <% if (page.total > 1 && page.next_link){ %>
+        <div id="pagination"><a href="<%- url_for(page.next_link) %>" class="">Previous</a></div>
+    <% } %>
+</div>
