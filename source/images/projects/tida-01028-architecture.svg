@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">TIDA-01028 system architecture</title>
+  <desc id="desc">Four analog inputs feed two ADC12DJ3200 converters, synchronized by a shared clock tree and connected to an FPGA through FMC Plus.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#334155"/></marker>
+    <style>
+      .t{font-family:Arial,sans-serif;fill:#172033}.h{font-size:31px;font-weight:700}.s{font-size:21px}.box{fill:#fff;stroke:#cbd5e1;stroke-width:2}.line{stroke:#334155;stroke-width:4;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1400" height="760" fill="#f7f9fc"/>
+  <text x="70" y="70" class="t h">TIDA-01028: 4-channel, 12.8-GSPS acquisition platform</text>
+  <g>
+    <rect x="70" y="135" width="250" height="470" rx="8" class="box"/>
+    <rect x="70" y="135" width="250" height="14" fill="#e15b64"/>
+    <text x="105" y="195" class="t h">Analog front end</text>
+    <text x="105" y="250" class="t s">CH1  LMH5401 + LMH6401</text><text x="105" y="310" class="t s">CH2  LMH5401 + LMH6401</text>
+    <text x="105" y="410" class="t s">CH3  LMH5401 + LMH6401</text><text x="105" y="470" class="t s">CH4  LMH5401 + LMH6401</text>
+    <text x="105" y="550" class="t s">Transformer / amplifier options</text>
+  </g>
+  <g>
+    <rect x="425" y="155" width="265" height="180" rx="8" class="box"/><rect x="425" y="155" width="265" height="14" fill="#2f78c4"/>
+    <text x="465" y="225" class="t h">ADC12DJ3200 #1</text><text x="465" y="272" class="t s">CH1 + CH2 / JESD204B</text>
+    <rect x="425" y="405" width="265" height="180" rx="8" class="box"/><rect x="425" y="405" width="265" height="14" fill="#2f78c4"/>
+    <text x="465" y="475" class="t h">ADC12DJ3200 #2</text><text x="465" y="522" class="t s">CH3 + CH4 / JESD204B</text>
+  </g>
+  <g>
+    <rect x="810" y="135" width="260" height="470" rx="8" class="box"/><rect x="810" y="135" width="260" height="14" fill="#2aa876"/>
+    <text x="855" y="205" class="t h">Clock tree</text><text x="855" y="270" class="t s">LMK61E2 reference</text><text x="855" y="315" class="t s">LMK04828 cleaner</text>
+    <text x="855" y="360" class="t s">LMK00304 buffer</text><text x="855" y="405" class="t s">2 x LMX2594 PLL</text>
+    <text x="855" y="485" class="t s">DEVCLK + SYSREF</text><text x="855" y="530" class="t s">Deterministic latency</text>
+  </g>
+  <g>
+    <rect x="1170" y="225" width="170" height="285" rx="8" class="box"/><rect x="1170" y="225" width="170" height="14" fill="#d39b2a"/>
+    <text x="1205" y="300" class="t h">FMC+</text><text x="1205" y="355" class="t s">FPGA lanes</text><text x="1205" y="400" class="t s">SYNC</text><text x="1205" y="445" class="t s">REFCLK</text>
+  </g>
+  <path d="M320 250H405" class="line"/><path d="M320 455H405" class="line"/><path d="M690 245H780V195H800" class="line"/><path d="M690 495H780V545H800" class="line"/>
+  <path d="M1070 320H1140V300H1160" class="line"/><path d="M1070 440H1140V455H1160" class="line"/>
+  <text x="70" y="690" class="t s">Power: TPS25926 input protection, TPS82130 point-of-load converters, TPS7A83/84/33 low-noise rails</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="TIDA-01028 schematic analysis cover">
+  <rect width="1200" height="675" fill="#172033"/>
+  <path d="M0 500L290 340 510 430 790 235 1200 410V675H0Z" fill="#24334a"/>
+  <g fill="none" stroke="#53b6d8" stroke-width="4"><path d="M90 175H310V265H475"/><path d="M90 265H250V350H475"/><path d="M725 220H900V150H1110"/><path d="M725 330H970V420H1110"/></g>
+  <g fill="#e15b64"><circle cx="90" cy="175" r="10"/><circle cx="90" cy="265" r="10"/><circle cx="475" cy="265" r="10"/><circle cx="725" cy="330" r="10"/><circle cx="1110" cy="420" r="10"/></g>
+  <rect x="475" y="170" width="250" height="250" rx="8" fill="#f8fafc"/>
+  <text x="600" y="265" text-anchor="middle" font-family="Arial,sans-serif" font-size="42" font-weight="700" fill="#172033">ADC12DJ3200</text>
+  <text x="600" y="325" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" fill="#475569">12.8 GSPS</text>
+  <text x="600" y="375" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" fill="#475569">TIDA-01028</text>
+  <text x="70" y="590" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#fff">SIGNAL CHAIN / CLOCK / JESD204B / POWER</text>
+</svg>
