@@ -30,15 +30,16 @@
                                 <ul class="al_mon_list">
                                     <li class="al_li">
                                         <div class="al_mon_card">
-                                            <span class="al_mon"><%= date(post.date, 'MM') %>月(<span
-                                                        id="post-num">3</span>篇文章)</span>
+                                            <% var monthKey = date(post.date, 'YYYYMM'); %>
+                                            <% var monthCount = site.posts.data.filter(function(item) { return date(item.date, 'YYYYMM') === monthKey; }).length; %>
+                                            <span class="al_mon"><%= date(post.date, 'MM') %>月 · <%= monthCount %> 篇</span>
                                         </div>
 
                                         <ul class="al_post_list">
                                             <% } %>
                                             <li>
                                                 <a href="<%- url_for(post.path) %>">
-                                                        <span style="color:orange;">
+                                                        <span class="archive-date">
                                                             <%= date(post.date, 'DD') %>日<%= time(post.date) %>
                                                         </span>
                                                     <%= post.title %>
@@ -57,17 +58,3 @@
         </div>
     </div>
 </div>
-<style>
-    div.blank {
-        padding-top: 75px;
-    }
-
-    div.al_mon_card {
-        display: inline-block;
-        background-color: orange;
-        border-radius: 8px;
-        padding: 2px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    }
-
-</style>

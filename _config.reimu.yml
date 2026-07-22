@@ -1,0 +1,137 @@
+menu:
+  - name: 首页
+    url: /
+  - name: 项目
+    url: /categories/项目记录
+  - name: 问题
+    url: /categories/问题排查
+  - name: 关于
+    url: /about
+
+subtitle:
+  typing:
+    enable: true
+    strings:
+      - 从原理图到实测波形，记录每一次验证
+      - 拆解硬件架构，也保留踩坑与修正
+      - 愿好奇心与电路一起保持通电
+    typeSpeed: 55
+    backSpeed: 40
+    backDelay: 2200
+    startDelay: 200
+    loop: true
+    shuffle: false
+    showCursor: true
+    cursorChar: "_"
+    smartBackspace: false
+
+sidebar:
+  position: right
+  menu: true
+  article:
+    show_common: true
+
+social:
+  github: https://github.com/alen9966
+
+banner: /images/anime/hyouka-bg-index.jpg
+cover: /images/anime/natsume-series7-main.jpg
+
+widgets:
+  - recent_posts
+  - category
+  - archive
+
+recent_posts_limits: 6
+show_update_time: true
+
+home_categories:
+  enable: true
+  content:
+    - categories: 项目记录
+      cover: /images/anime/natsume-season5-visual.jpg
+    - categories: 问题排查
+      cover: /images/anime/natsume-teaser-pv.jpg
+    - categories: 实习复盘
+      cover: /images/anime/natsume-sound-theatre.png
+
+summary:
+  enable: true
+  style: subtitle
+
+footer:
+  since: 2026
+  powered: false
+  count: true
+  busuanzi: true
+
+custom_font:
+  enable: true
+  article:
+    - css: https://fontsapi.zeoseven.com/292/main/result.css
+      name: LXGW WenKai
+
+reimu_cursor:
+  enable: false
+
+dark_mode:
+  enable: false
+
+generator_search:
+  enable: true
+  field: post
+  content: true
+
+firework:
+  enable: false
+  disable_on_mobile: false
+
+pace:
+  enable: true
+
+preloader:
+  enable: true
+  text:
+    zh-CN: 页面整理中...
+    en: Loading...
+
+animation:
+  enable: true
+  options:
+    header:
+      title: slide-up
+      subTitle: slide-down
+    home:
+      post: fade-up
+      widget: fade-up
+      sidebar: fade-up
+    article:
+      whole: fade-up
+      date: zoom-in
+      category: zoom-in
+      tag: zoom-in
+      comment: zoom-in
+      reading: zoom-in
+      nav: fade-up
+
+internal_theme:
+  light:
+    --red-0: "#f06c8d"
+    --red-1: "#f589a2"
+    --red-2: "#f8a8b9"
+    --red-3: "#fbc9d4"
+    --red-4: "#fde5eb"
+    --red-5: "#fff2f6"
+    --red-5-5: "#fff7fa"
+    --red-6: "#fffbfd"
+    --color-red-6-shadow: "rgba(240, 108, 141, 0.42)"
+    --color-red-3-shadow: "rgba(240, 108, 141, 0.18)"
+  dark:
+    --red-4: "rgba(251, 201, 212, 0.36)"
+    --red-5: "rgba(255, 242, 246, 0.12)"
+    --red-5-5: "rgba(255, 247, 250, 0.08)"
+    --red-6: "rgba(255, 251, 253, 0.16)"
+
+injector:
+  head_end:
+    - <link rel="stylesheet" href="/css/site-home.css">

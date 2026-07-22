@@ -3,12 +3,12 @@ siteName: "项目手记"
 favicon: /images/projects/avatar-board.svg
 avatar: /images/projects/avatar-board.svg
 url: https://alen9966.github.io/
-description: "按项目记录前置知识、物理结构、原理图 PCB、问题定位和焊接调试。"
+description: "从原理图到实测波形，记录硬件设计中的选择、失误与验证。"
 cdn:
 pjax: 1
 mathjax: 0
 
-notice: "默认写法固定为四段：前置知识和物理结构、原理图与 PCB、遇到的问题、焊接与调试。后面你告诉我项目细节，我直接按这个结构帮你整理成博客。"
+notice: "这里记录从原理图到实测波形的完整过程：理解背景，拆解实现，记录问题，再用数据验证结论。"
 lazyloadImg: /images/projects/cover-framework.svg
 
 menus:
@@ -26,9 +26,9 @@ bg:
 bgclass: filter-grid
 
 startdash:
-  - { url: /projects/, title: "写作框架", desc: "固定拆成前置知识、原理图 PCB、问题记录和焊接调试四段。", img: /images/projects/cover-framework.svg }
-  - { url: /2026/07/21/oscilloscope-calibrator-power/, title: "示波器校准仪电源", desc: "先搭电源项目模板，后面补电源链路、关键器件和调试记录。", img: /images/projects/cover-oscilloscope-power.svg }
-  - { url: /2026/07/21/ultrasonic-flaw-detector-panel/, title: "超声波探伤仪面板", desc: "先搭面板项目模板，后面补接口关系、板框结构和焊接调试过程。", img: /images/projects/cover-ultrasonic-panel.svg }
+  - { url: /2026/07/22/oscilloscope-time-interleaving-and-spectrum-slicing/, title: "高速示波器采样架构", desc: "从 TI 参考设计出发，理解时间交织、时钟相位和频谱分片。", img: /images/projects/cover-oscilloscope-sampling.svg }
+  - { url: /2026/07/21/oscilloscope-calibrator-power/, title: "示波器校准仪电源", desc: "围绕 ±310 V 母线、分立 LDO、纹波与温升展开记录。", img: /images/projects/cover-oscilloscope-power.svg }
+  - { url: /2026/07/21/ultrasonic-flaw-detector-panel/, title: "超声波探伤仪面板", desc: "记录面板结构、接口关系、PCB 约束和装配联调。", img: /images/projects/cover-ultrasonic-panel.svg }
 
 siteBuildingTime: 07/21/2026
 

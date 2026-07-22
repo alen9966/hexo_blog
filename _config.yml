@@ -5,7 +5,7 @@
 # Site
 title: 硬件项目手记
 subtitle: 按项目记录原理图、PCB、问题和调试
-description: 按项目整理前置知识、物理结构、原理图 PCB、问题定位和焊接调试过程。
+description: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。
 keywords:
   - 硬件项目
   - 原理图
@@ -90,7 +90,7 @@ exclude:
 ignore:
 
 # Extensions
-theme: Sakura
+theme: reimu
 
 # Deployment
 deploy:

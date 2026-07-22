@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#081525"/><stop offset="1" stop-color="#163b52"/></linearGradient><filter id="g"><feGaussianBlur stdDeviation="5"/></filter></defs>
+  <rect width="1200" height="630" fill="url(#bg)"/><path d="M0 480 C150 440 210 520 350 450 S560 350 690 420 870 500 1200 350" fill="none" stroke="#39d9c5" stroke-width="5" opacity=".25" filter="url(#g)"/>
+  <g fill="none" stroke="#6fe9d9" stroke-width="3"><path d="M90 370 C150 370 160 220 220 220s70 150 130 150 70-150 130-150 70 150 130 150"/><path d="M690 235h380M690 315h380M690 395h380" stroke-dasharray="8 10" opacity=".55"/></g>
+  <g fill="#ffca6a"><circle cx="130" cy="338" r="8"/><circle cx="210" cy="222" r="8"/><circle cx="290" cy="330" r="8"/><circle cx="370" cy="315" r="8"/><circle cx="450" cy="235" r="8"/><circle cx="530" cy="360" r="8"/></g>
+  <g font-family="Microsoft YaHei, sans-serif" fill="#fff"><text x="86" y="115" font-size="54" font-weight="700">示波器如何突破 ADC 采样率</text><text x="90" y="172" font-size="26" fill="#a8cbd8">时间交织 · 频谱分片 · 误差校准</text><text x="695" y="226" font-size="23">低频片段</text><text x="695" y="306" font-size="23">中频片段</text><text x="695" y="386" font-size="23">高频片段</text></g>
+</svg>
