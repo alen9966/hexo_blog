@@ -11,8 +11,8 @@ tags:
 categories:
   - 学习记录
 description: 独立拆解 TI TIDA-01028 的 26 页正式原理图，梳理四路宽带模拟前端、双 ADC12DJ3200、LMK04828 与双 LMX2594 时钟树、FMC+ 接口和低噪声电源架构。
-banner: /images/anime/hyouka-bg-index.jpg
-cover: /images/projects/cover-tida-01028.svg
+banner: /images/myimge/xm1.png
+cover: /images/myimge/xm1.png
 author: Alen
 authorLink: https://github.com/alen9966
 avatar: /images/projects/avatar-board.svg

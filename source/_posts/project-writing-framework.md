@@ -9,8 +9,8 @@ tags:
 categories:
   - 项目记录
 description: 用统一结构记录硬件项目，让设计依据、原理图、问题定位和实测结论能够互相对应。
-banner: /images/anime/natsume-sound-theatre.png
-cover: /images/projects/cover-framework.svg
+banner: /images/myimge/xm1.png
+cover: /images/myimge/xm1.png
 author: Alen
 authorLink: https://github.com/alen9966
 avatar: /images/projects/avatar-board.svg

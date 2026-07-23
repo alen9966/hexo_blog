@@ -10,8 +10,8 @@ tags:
 categories:
   - 学习记录
 description: 从 TI TIDA-01028 参考设计出发，梳理时间交织采样的时钟链、误差来源与校准方法，并进一步理解高带宽仪器中的频谱分片架构。
-banner: /images/anime/hyouka-bg-index.jpg
-cover: /images/projects/cover-oscilloscope-sampling.svg
+banner: /images/myimge/xm1.png
+cover: /images/myimge/xm1.png
 author: Alen
 authorLink: https://github.com/alen9966
 avatar: /images/projects/avatar-board.svg

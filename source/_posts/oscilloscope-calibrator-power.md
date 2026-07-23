@@ -10,8 +10,8 @@ tags:
 categories:
   - 项目记录
 description: 给高压运放做一块 ±300V 低纹波电源，前级建立 ±310V 母线，后级用分立 LDO 做最后一级净化。
-banner: /images/anime/natsume-season5-visual.jpg
-cover: /images/projects/cover-oscilloscope-power.svg
+banner: /images/myimge/xm1.png
+cover: /images/myimge/xm1.png
 author: Alen
 authorLink: https://github.com/alen9966
 avatar: /images/projects/avatar-board.svg

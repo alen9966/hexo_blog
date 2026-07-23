@@ -10,8 +10,8 @@ tags:
 categories:
   - 项目记录
 description: 梳理超声波探伤仪面板的功能边界，后续持续补充按键、显示、接口与整机联调结果。
-banner: /images/anime/natsume-series7-main.jpg
-cover: /images/projects/cover-ultrasonic-panel.svg
+banner: /images/myimge/xm1.png
+cover: /images/myimge/xm1.png
 author: Alen
 authorLink: https://github.com/alen9966
 avatar: /images/projects/avatar-board.svg
