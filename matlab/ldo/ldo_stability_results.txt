@@ -1,0 +1,9 @@
+Educational LDO loop model (not a specific IC)
+A0 = 30000
+Poles = 10 Hz, 2000 Hz, 100000 Hz
+Cout = 1e-05 F
+
+ESR(ohm)	ESR zero(Hz)	Crossover(Hz)	Phase margin(deg)	Closed-loop stable
+0.05	318310	24143.7	-4.47687	0
+1	15915.5	38120.8	49.4904	1
+20	795.775	265635	20.8911	1

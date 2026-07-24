@@ -128,3 +128,10 @@ internal_theme:
 injector:
   head_end:
     - <link rel="stylesheet" href="/css/site-home.css">
+math:
+  enable: true
+  katex:
+    enable: false
+    autoRender: false
+  mathjax:
+    enable: true
