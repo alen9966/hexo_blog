@@ -3,27 +3,23 @@ title: TIDA-01028 原理图深度拆解：从 4 路模拟前端到 12.8 GSPS 采
 slug: tida-01028-schematic-deep-dive
 date: 2026-07-22 14:30:00
 tags:
-  - 示波器
+  - 高速采集
   - ADC
   - JESD204B
   - 时钟设计
-  - 原理图
 categories:
   - 学习记录
 description: 独立拆解 TI TIDA-01028 的 26 页正式原理图，梳理四路宽带模拟前端、双 ADC12DJ3200、LMK04828 与双 LMX2594 时钟树、FMC+ 接口和低噪声电源架构。
-banner: /images/myimge/xm1.png
-cover: /images/myimge/xm1.png
+banner: /images/myimge/wallhaven-ey9ejo.jpg
+cover: /images/myimge/sn2.png
 author: Alen
 authorLink: https://github.com/alen9966
-avatar: /images/projects/avatar-board.svg
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。
 ---
 
 `TIDRZ70` 是 TI 参考设计 `TIDA-01028` 的完整原理图。它不是一张“高速 ADC 最小系统”，而是一套可以直接用来学习宽带采集平台分区方法的工程样本：四路模拟输入、两颗 `ADC12DJ3200`、两套射频采样时钟、一个系统级时钟清理器、JESD204B 高速串行链路、FMC+ 接口，以及为这些模块服务的多路低噪声电源。
 
 这篇文章不逐个抄元件参数，而是回答五个更重要的问题：信号怎样走、时钟怎样保证同步、数据怎样进入 FPGA、电源为什么要拆成这么多路，以及看类似原理图时应该先检查什么。
-
-![TIDA-01028 系统架构](/images/projects/tida-01028-architecture.svg)
 
 ## 一、先建立整机视角
 

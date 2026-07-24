@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680">
+  <rect width="1200" height="680" fill="#fbfcff"/>
+  <style>
+    .title{font:700 30px "Microsoft YaHei",sans-serif;fill:#182033}
+    .head{font:700 23px "Microsoft YaHei",sans-serif;fill:#25304a}
+    .label{font:17px "Microsoft YaHei",sans-serif;fill:#4b5772}
+    .small{font:15px "Microsoft YaHei",sans-serif;fill:#69758d}
+    .axis{stroke:#8290aa;stroke-width:2}
+    .grid{stroke:#dce2ed;stroke-width:1;stroke-dasharray:5 6}
+    .mag{fill:none;stroke:#2563eb;stroke-width:4}
+    .phase{fill:none;stroke:#e05263;stroke-width:4}
+    .mark{stroke:#7b879e;stroke-width:2;stroke-dasharray:7 6}
+  </style>
+  <text x="600" y="48" text-anchor="middle" class="title">单个零点、极点对波特图的影响</text>
+  <text x="600" y="78" text-anchor="middle" class="small">蓝色：幅频特性　红色：相频特性　虚线：转折频率 ω₀</text>
+
+  <g transform="translate(40 112)">
+    <rect width="350" height="510" rx="18" fill="#fff" stroke="#dce2ed"/>
+    <text x="175" y="38" text-anchor="middle" class="head">左半平面极点</text>
+    <text x="175" y="66" text-anchor="middle" class="label">1 / (1 + s/ω₀)</text>
+    <line x1="52" y1="103" x2="52" y2="255" class="axis"/><line x1="52" y1="218" x2="318" y2="218" class="axis"/>
+    <line x1="185" y1="103" x2="185" y2="460" class="mark"/>
+    <path d="M52 150 L185 150 L318 218" class="mag"/>
+    <text x="228" y="185" class="small">−20 dB/dec</text>
+    <text x="15" y="155" class="small">0 dB</text>
+    <line x1="52" y1="302" x2="52" y2="460" class="axis"/><line x1="52" y1="338" x2="318" y2="338" class="axis"/>
+    <path d="M52 338 C122 338 145 358 185 397 C225 436 248 452 318 452" class="phase"/>
+    <text x="12" y="343" class="small">0°</text><text x="5" y="456" class="small">−90°</text>
+    <text x="185" y="486" text-anchor="middle" class="small">ω₀</text>
+    <text x="175" y="503" text-anchor="middle" class="label">增加相位滞后</text>
+  </g>
+
+  <g transform="translate(425 112)">
+    <rect width="350" height="510" rx="18" fill="#fff" stroke="#dce2ed"/>
+    <text x="175" y="38" text-anchor="middle" class="head">左半平面零点</text>
+    <text x="175" y="66" text-anchor="middle" class="label">1 + s/ω₀</text>
+    <line x1="52" y1="103" x2="52" y2="255" class="axis"/><line x1="52" y1="218" x2="318" y2="218" class="axis"/>
+    <line x1="185" y1="103" x2="185" y2="460" class="mark"/>
+    <path d="M52 218 L185 218 L318 150" class="mag"/>
+    <text x="226" y="185" class="small">+20 dB/dec</text>
+    <text x="15" y="223" class="small">0 dB</text>
+    <line x1="52" y1="302" x2="52" y2="460" class="axis"/><line x1="52" y1="420" x2="318" y2="420" class="axis"/>
+    <path d="M52 420 C122 420 145 400 185 361 C225 322 248 306 318 306" class="phase"/>
+    <text x="12" y="425" class="small">0°</text><text x="5" y="311" class="small">+90°</text>
+    <text x="185" y="486" text-anchor="middle" class="small">ω₀</text>
+    <text x="175" y="503" text-anchor="middle" class="label">提供相位超前</text>
+  </g>
+
+  <g transform="translate(810 112)">
+    <rect width="350" height="510" rx="18" fill="#fff" stroke="#dce2ed"/>
+    <text x="175" y="38" text-anchor="middle" class="head">右半平面零点</text>
+    <text x="175" y="66" text-anchor="middle" class="label">1 − s/ω₀</text>
+    <line x1="52" y1="103" x2="52" y2="255" class="axis"/><line x1="52" y1="218" x2="318" y2="218" class="axis"/>
+    <line x1="185" y1="103" x2="185" y2="460" class="mark"/>
+    <path d="M52 218 L185 218 L318 150" class="mag"/>
+    <text x="226" y="185" class="small">+20 dB/dec</text>
+    <text x="15" y="223" class="small">0 dB</text>
+    <line x1="52" y1="302" x2="52" y2="460" class="axis"/><line x1="52" y1="338" x2="318" y2="338" class="axis"/>
+    <path d="M52 338 C122 338 145 358 185 397 C225 436 248 452 318 452" class="phase"/>
+    <text x="12" y="343" class="small">0°</text><text x="5" y="456" class="small">−90°</text>
+    <text x="185" y="486" text-anchor="middle" class="small">ω₀</text>
+    <text x="175" y="503" text-anchor="middle" class="label">幅值上升，但相位继续滞后</text>
+  </g>
+</svg>

@@ -2,18 +2,16 @@
 title: 硬件项目记录方法：从原理图到调试闭环
 slug: project-writing-framework
 date: 2026-07-21 10:30:00
-sticky: true
 tags:
   - 写作框架
   - 项目记录
 categories:
   - 项目记录
 description: 用统一结构记录硬件项目，让设计依据、原理图、问题定位和实测结论能够互相对应。
-banner: /images/myimge/xm1.png
+banner: /images/myimge/wallhaven-y8v9dk.jpg
 cover: /images/myimge/xm1.png
 author: Alen
 authorLink: https://github.com/alen9966
-avatar: /images/projects/avatar-board.svg
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。
 ---
 

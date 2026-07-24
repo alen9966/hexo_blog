@@ -3,18 +3,17 @@ title: 示波器如何突破 ADC 采样率：时间交织与频谱分片
 slug: oscilloscope-time-interleaving-and-spectrum-slicing
 date: 2026-07-22 10:30:00
 tags:
-  - 示波器
+  - 高速采集
   - ADC
   - 时间交织
   - 频谱分片
 categories:
   - 学习记录
 description: 从 TI TIDA-01028 参考设计出发，梳理时间交织采样的时钟链、误差来源与校准方法，并进一步理解高带宽仪器中的频谱分片架构。
-banner: /images/myimge/xm1.png
-cover: /images/myimge/xm1.png
+banner: /images/myimge/wallhaven-yq2mll.jpg
+cover: /images/myimge/xm3.png
 author: Alen
 authorLink: https://github.com/alen9966
-avatar: /images/projects/avatar-board.svg
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。
 ---
 
@@ -27,8 +26,6 @@ authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失�
 假设有 `M` 路 ADC，每路采样率为 `Fs`，只要相邻通道的采样时刻依次错开 `Ts/M`，理论上的等效采样率就是：
 
 `Fs,total = M × Fs`
-
-![时间交织结构](/images/projects/oscilloscope-time-interleaving.svg)
 
 TI 的 TIDA-01028 是一个很具体的例子。它使用两颗 `ADC12DJ3200`，每颗 ADC 在单通道模式下内部已经由两个 ADC 核以 `0°` 和 `180°` 工作，得到 `6.4 GSPS`。板上再让第二颗器件相对第一颗偏移 `90°`，于是四组采样相位成为 `0°、90°、180°、270°`，合并后得到单通道 `12.8 GSPS`。
 
@@ -77,8 +74,6 @@ TI 的 TIDA-01028 是一个很具体的例子。它使用两颗 `ADC12DJ3200`，
 
 当目标模拟带宽继续提高，仅增加时间交织路数会让超高速时钟、输入分配和皮秒级通道匹配变得非常困难。另一条路线是频谱分片：不让每颗 ADC 都直接处理完整带宽，而是让它们各自处理一段频谱。
 
-![频谱分片结构](/images/projects/oscilloscope-spectrum-slicing.svg)
-
 一个便于理解的处理流程是：
 
 1. 宽带输入经过功分或频率选择网络，进入多条支路；
@@ -88,7 +83,7 @@ TI 的 TIDA-01028 是一个很具体的例子。它使用两颗 `ADC12DJ3200`，
 5. 数字域完成数字下变频、幅度归一、相位和群时延校准；
 6. 在相邻子带的重叠区域估计误差并平滑拼接，恢复宽带时域波形或频谱。
 
-我的初步理解大体正确，不过“最后通过数字下变频进行输出”的顺序可以再严谨一点：**数字下变频通常发生在各子带内部，频谱平移到正确位置并完成幅相校准后，才进行最终合成。**如果目标是实时示波器，还要通过逆变换得到连续的时域波形；如果只是频谱分析仪，则可以直接保留频域结果。
+数字下变频通常发生在各子带内部。各子带平移到正确的频率位置并完成幅相校准后，才能进行最终合成。如果目标是实时示波器，还需要通过逆变换恢复连续的时域波形；如果只做频谱分析，则可以直接保留频域结果。
 
 ### 频谱为什么不能直接硬拼
 

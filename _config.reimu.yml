@@ -2,9 +2,7 @@ menu:
   - name: 首页
     url: /
   - name: 项目
-    url: /categories/项目记录
-  - name: 问题
-    url: /categories/问题排查
+    url: /projects/
   - name: 关于
     url: /about
 
@@ -34,8 +32,8 @@ sidebar:
 social:
   github: https://github.com/alen9966
 
-banner: /images/myimge/xm2.png
-cover: /images/anime/natsume-series7-main.jpg
+banner: /images/myimge/wallhaven-3ze1v3.jpg
+cover: false
 
 widgets:
   - recent_posts
@@ -46,14 +44,8 @@ recent_posts_limits: 6
 show_update_time: true
 
 home_categories:
-  enable: true
-  content:
-    - categories: 项目记录
-      cover: /images/anime/natsume-season5-visual.jpg
-    - categories: 问题排查
-      cover: /images/anime/natsume-teaser-pv.jpg
-    - categories: 实习复盘
-      cover: /images/anime/natsume-sound-theatre.png
+  enable: false
+  content: []
 
 summary:
   enable: true
@@ -62,14 +54,15 @@ summary:
 footer:
   since: 2026
   powered: false
-  count: true
-  busuanzi: true
+  count: false
+  busuanzi: false
 
 custom_font:
-  enable: true
-  article:
-    - css: https://fontsapi.zeoseven.com/292/main/result.css
-      name: LXGW WenKai
+  enable: false
+  article: []
+
+font:
+  enable: false
 
 reimu_cursor:
   enable: false
@@ -87,16 +80,16 @@ firework:
   disable_on_mobile: false
 
 pace:
-  enable: true
+  enable: false
 
 preloader:
-  enable: true
+  enable: false
   text:
     zh-CN: 页面整理中...
     en: Loading...
 
 animation:
-  enable: true
+  enable: false
   options:
     header:
       title: slide-up

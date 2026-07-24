@@ -708,6 +708,10 @@ body {
   min-height: 180px;
 }
 
+#article-nav .article-nav-link-wrap > a {
+  z-index: 3;
+}
+
 #article-nav .article-nav-caption,
 #article-nav .article-nav-title {
   position: relative;
@@ -727,6 +731,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
+  pointer-events: none;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(30, 16, 40, 0.5) 100%),
     linear-gradient(120deg, rgba(240, 108, 141, 0.18) 0%, rgba(119, 184, 255, 0.16) 100%);
