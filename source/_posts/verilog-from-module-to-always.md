@@ -10,6 +10,8 @@ tags:
 categories:
   - 学习记录
 description: 从二选一多路选择器出发，理解 Verilog 模块、连续赋值、过程块、阻塞与非阻塞赋值，以及 wire、reg 和锁存器之间的关系。
+banner: /images/myimge/wallhaven-pink/wallhaven-x6xq2v.jpg
+cover: /images/myimge/wallhaven-pink/wallhaven-vq95d8.jpg
 author: Alen
 authorLink: https://github.com/alen9966
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。

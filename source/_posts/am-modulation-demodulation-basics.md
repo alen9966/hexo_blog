@@ -10,8 +10,8 @@ tags:
 categories:
   - 学习记录
 description: 从低频基带信号为什么需要调制出发，理解 AM 的信号模型、调制度、频谱、功率，以及相干解调和包络检波的基本条件。
-banner: /images/myimge/wallhaven-yqg6r7.jpg
-cover: /images/myimge/wallhaven-6lp3o6.jpg
+banner: /images/myimge/wallhaven-pink/wallhaven-3zl3e3.jpg
+cover: /images/myimge/wallhaven-pink/wallhaven-qz655l.jpg
 author: Alen
 authorLink: https://github.com/alen9966
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。

@@ -10,6 +10,8 @@ tags:
 categories:
   - 学习记录
 description: 从串联 RLC 电路的微分方程出发，理解传递函数、卷积、零极点、频率响应和闭环稳定性之间的关系，并用 MATLAB 验证 RL 一阶系统与反馈系统的响应。
+banner: /images/myimge/wallhaven-pink/wallhaven-qr9jml.jpg
+cover: /images/myimge/wallhaven-pink/wallhaven-7p3we9.jpg
 author: Alen
 authorLink: https://github.com/alen9966
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。

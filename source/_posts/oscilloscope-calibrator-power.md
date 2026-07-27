@@ -9,8 +9,8 @@ tags:
 categories:
   - 项目记录
 description: 给高压运放做一块 ±300V 低纹波电源，前级建立 ±310V 母线，后级用分立 LDO 做最后一级净化。
-banner: /images/myimge/xm2.png
-cover: /images/myimge/wallhaven-1qgvgg.jpg
+banner: /images/myimge/wallhaven-pink/wallhaven-pkxqpm.jpg
+cover: /images/myimge/wallhaven-pink/wallhaven-l35xgr.jpg
 author: Alen
 authorLink: https://github.com/alen9966
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。

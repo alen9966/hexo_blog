@@ -9,8 +9,8 @@ tags:
 categories:
   - 项目记录
 description: 记录超声波探伤仪面板的项目范围和当前进度，后续补充按键、显示、接口与整机联调结果。
-banner: /images/myimge/OIP.webp
-cover: /images/myimge/sn1.png
+banner: /images/myimge/wallhaven-pink/wallhaven-jxe3ry.jpg
+cover: /images/myimge/wallhaven-pink/wallhaven-werdv6.jpg
 author: Alen
 authorLink: https://github.com/alen9966
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。

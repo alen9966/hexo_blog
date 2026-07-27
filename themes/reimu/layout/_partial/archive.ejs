@@ -25,66 +25,6 @@
       <%_ } _%>
     </div>
   <%_ } _%>
-  <section class="home-purpose" data-aos="<%= theme.animation.options.home.post %>">
-    <div class="home-purpose__grid">
-      <article class="home-purpose__summary">
-        <p class="home-purpose__eyebrow">Site Focus</p>
-        <h2>记录真实项目、问题排查和实习复盘</h2>
-        <p class="home-purpose__summary-text">
-          首页先按分类看内容，文章里再展开背景、方案、排查过程和最终结论。
-        </p>
-        <div class="home-purpose__chips">
-          <span>项目记录</span>
-          <span>问题排查</span>
-          <span>实习复盘</span>
-          <span>持续更新</span>
-        </div>
-      </article>
-      <article class="home-purpose__card">
-        <span class="home-purpose__badge">01</span>
-        <h3>需求到交付</h3>
-        <p>把背景、目标、方案选择和交付结果拆开写，避免只有结论没有上下文。</p>
-      </article>
-      <article class="home-purpose__card">
-        <span class="home-purpose__badge">02</span>
-        <h3>问题到结论</h3>
-        <p>记录现象、假设、验证和修复方式，让排查过程以后还能继续复用。</p>
-      </article>
-      <article class="home-purpose__card">
-        <span class="home-purpose__badge">03</span>
-        <h3>经验沉淀</h3>
-        <p>把实习里真正值得保留的方法、习惯和判断标准，一点点沉淀下来。</p>
-      </article>
-    </div>
-  </section>
-  <section class="home-notes" data-aos="<%= theme.animation.options.home.post %>">
-    <div class="home-notes__panel">
-      <p class="home-purpose__eyebrow">What To Expect</p>
-      <h2>更新时会尽量保留过程，而不是只贴最后答案</h2>
-      <ul>
-        <li>先交代场景，再写技术点，避免内容脱离上下文。</li>
-        <li>能说明为什么这样做，就不只写“最后用了什么方案”。</li>
-        <li>同一类问题后续再出现，会继续补充在原有思路基础上。</li>
-      </ul>
-    </div>
-    <div class="home-notes__aside">
-      <div class="home-notes__aside-card">
-        <span>01</span>
-        <h3>适合谁看</h3>
-        <p>适合对实习项目、问题排查和工作复盘感兴趣的人。</p>
-      </div>
-      <div class="home-notes__aside-card">
-        <span>02</span>
-        <h3>怎么阅读</h3>
-        <p>可以按分类浏览，也可以直接从最新文章进入具体项目或问题。</p>
-      </div>
-      <div class="home-notes__aside-card">
-        <span>03</span>
-        <h3>更新方式</h3>
-        <p>后面你把真实问题和解决过程告诉我，我会继续整理成适合公开阅读的版本。</p>
-      </div>
-    </div>
-  </section>
   <%_ if (page.lang) { _%>
     <%_ let i = 0; _%>
     <%_ for (const post of get_posts_by_lang(page.posts, page.lang)) { _%>

@@ -8,8 +8,8 @@ tags:
 categories:
   - 项目记录
 description: 用统一结构记录硬件项目，让设计依据、原理图、问题定位和实测结论能够互相对应。
-banner: /images/myimge/wallhaven-y8v9dk.jpg
-cover: /images/myimge/xm1.png
+banner: /images/myimge/wallhaven-pink/wallhaven-5gvpg7.jpg
+cover: /images/myimge/wallhaven-pink/wallhaven-5we787.jpg
 author: Alen
 authorLink: https://github.com/alen9966
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。

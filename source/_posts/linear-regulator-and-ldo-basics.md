@@ -9,8 +9,8 @@ tags:
 categories:
   - 学习记录
 description: 以示波器校准仪的 ±310V 转 ±300V 电源为背景，从反馈模型和传递函数出发，用零极点、波特图、相位裕量和 MATLAB 仿真理解 LDO 为什么可能稳定或振荡。
-banner: /images/myimge/下载.webp
-cover: /images/myimge/wallhaven-42r7yg.jpg
+banner: /images/myimge/wallhaven-pink/wallhaven-l83k62.jpg
+cover: /images/myimge/wallhaven-pink/wallhaven-0wg366.jpg
 author: Alen
 authorLink: https://github.com/alen9966
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。
