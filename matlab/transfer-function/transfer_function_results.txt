@@ -1,0 +1,7 @@
+RL series theoretical model
+R = 10 ohm
+L = 0.01 H
+tau = 0.001 s
+G_RL(s) = I(s)/U(s) = 1/(L*s+R)
+pole = -R/L = -1000 rad/s
+corner frequency = 159.1549 Hz
