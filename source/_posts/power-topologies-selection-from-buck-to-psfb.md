@@ -10,7 +10,7 @@ tags:
   - 隔离电源
 categories:
   - 学习记录
-description: 以 TI《Power Topologies Handbook》为线索，按升降压关系、隔离需求、能量传递方式和器件应力，梳理 Buck、Boost、SEPIC、Flyback、Push-Pull 与移相全桥等常见拓扑的选择逻辑。
+description: 结合电路结构、理想 CCM 变换关系和关键节点波形，系统梳理 Buck、Boost、Buck-Boost、SEPIC、Cuk、Zeta、Flyback、Forward、Push-Pull、Half-Bridge、Full-Bridge 与 PSFB。
 banner: /images/myimge/power-topologies/power-topologies-handbook-cover.jpg
 cover: /images/myimge/power-topologies/power-topologies-handbook-card.jpg
 author: Alen
@@ -18,163 +18,336 @@ authorLink: https://github.com/alen9966
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。
 ---
 
-刚开始接触开关电源时，我很容易把拓扑选择理解成“降压用 Buck，升压用 Boost”。这句话没有错，却只回答了最前面的一步。输入电压会不会跨过输出电压？需不需要隔离？功率和电流有多大？允许多复杂的磁性器件与驱动？这些条件一变，合适的电路也会跟着变。
+刚开始接触开关电源时，我很容易把拓扑选择理解成“降压用 Buck，升压用 Boost”。真正开始看器件应力和关键节点波形后才发现，升降压关系只是第一层：输入会不会跨过输出、是否隔离、能量在哪个开关状态送到负载、磁芯怎样复位、功率器件承受多大的峰值和 RMS 电流，都会改变最终选择。
 
-TI 的《Power Topologies Handbook》把 Buck、Boost、SEPIC、Flyback、Forward、Push-Pull、Half-Bridge、Full-Bridge 和 Phase-Shifted Full-Bridge 等拓扑放在同一套电流计算框架下。本文不逐页翻译公式，而是整理我读完后形成的一条选择逻辑：先判断输入输出关系和隔离，再看能量在开关周期的哪个阶段送到负载，最后用电流应力、控制难度和磁性器件复杂度做取舍。
+这篇文章以 TI《Power Topologies Handbook》为主线，把文中出现的拓扑逐一展开。重点不是罗列名称，而是把每一种电路的功率路径、关键公式和电压电流波形对应起来。文中的波形来自手册，是理想化的理论波形，不是硬件实测；公式默认理想器件、稳态和连续导通模式（CCM），实际设计还要加入器件压降、死区、漏感、寄生参数和损耗。
 
-文中电压变换比均指理想器件、稳态、连续导通模式（CCM）下的基本关系。实际设计还要计入二极管压降、开关导通压降、死区、漏感、损耗和控制器限制。本文没有硬件实测数据。
+## 一、先统一符号和读波形的方法
 
-## 一、选拓扑前先回答四个问题
+- $D$：占空比；除桥式拓扑另作说明外，表示一个周期内主开关导通时间占比。
+- $f_s$：开关频率，周期 $T_s=1/f_s$。
+- $n=N_s/N_p$：变压器次级对初级匝比。
+- 红线：关键节点或磁性器件电压；蓝线：对应电流。
+- $t_1$：主开关导通或正向传能区间；$t_2$：关断、续流或反向复位区间；$t_3$：DCM 中电流已经降为零的区间。
 
-我会先把需求压缩成四个问题：
-
-1. 输出电压始终低于输入、始终高于输入，还是会跨过输入？
-2. 输入与输出之间是否需要安全隔离或多个隔离输出？
-3. 输出功率和输入电流是否已经让单开关、单磁芯方案难以承受？
-4. 系统更看重成本和器件数，还是效率、EMI、动态响应与功率密度？
-
-前两个问题决定拓扑家族，后两个问题决定要不要从单端结构走向双端、半桥或全桥。拓扑不是按“高级程度”排列的；一个小功率隔离辅助电源用 Flyback 往往比全桥合理得多，而较高功率场景若继续堆 Flyback，也可能付出过高的峰值电流和钳位损耗。
-
-### CCM、DCM 和临界模式是同一拓扑的不同工作状态
-
-CCM（连续导通模式）表示一个周期结束时电感电流仍未降到零；DCM（断续导通模式）会出现一段零电流区间；临界模式位于两者边界。它们会改变峰值电流、RMS 电流、传递函数和器件损耗，因此不能只凭平均输出电流选电感、MOSFET 与二极管。
-
-以三角波纹波叠加直流分量为例，CCM 电感电流可近似写成：
+CCM 表示周期末电感电流仍大于零，DCM 表示电感电流会降到零，临界模式位于两者边界。对三角纹波叠加直流分量的 CCM 电流，常用近似为：
 
 $$
-I_{L,\mathrm{RMS}}=\sqrt{I_{L,\mathrm{avg}}^2+\frac{\Delta I_L^2}{12}}
+I_{L,\mathrm{RMS}}=\sqrt{I_{L,\mathrm{avg}}^2+\frac{\Delta I_L^2}{12}},\qquad
+I_{L,\mathrm{pk}}=I_{L,\mathrm{avg}}+\frac{\Delta I_L}{2}
 $$
 
-这条式子提醒我：热设计关注的是 RMS 电流，饱和与过流保护更关注峰值电流。手册大量篇幅计算各器件在 CCM、DCM 和临界模式下的最小值、最大值、平均值与 RMS 值，目的正是把“电路能工作”继续推进到“器件能承受”。
+这两个量分别联系发热和饱和：铜损及导通损耗更关心 RMS，电感饱和和逐周期限流更关心峰值。
 
-## 二、非隔离拓扑：先看输出相对输入的位置
+## 二、非隔离拓扑
 
-### Buck：只降压，但电流路径直接
+### 1. Buck：导通时直接向输出传能
 
-理想 Buck 的关系最简单：
+![异步 Buck 与同步 Buck 的功率级（TI《Power Topologies Handbook》SLYU036A，第 13 页局部）](/images/myimge/power-topologies/buck-asynchronous-and-synchronous.png)
 
-$$
-V_{out}=D V_{in}
-$$
-
-开关导通时，输入经开关和电感向负载供能，电感电流上升；开关关断后，电感通过续流支路保持输出电流。因为能量在主开关导通期间直接送到输出，Buck 很适合板级降压、电流较大的低压轨和负载点稳压。
-
-![异步 Buck 与同步 Buck 的功率级对比（TI《Power Topologies Handbook》SLYU036A，第 13 页局部）](/images/myimge/power-topologies/buck-asynchronous-and-synchronous.png)
-
-异步 Buck 用二极管续流，结构简单，但低输出电压、大电流时二极管压降会带来明显损耗。同步 Buck 把二极管换成 MOSFET，导通损耗可以下降，代价是要处理上下管死区、反向电流和驱动时序。这里的选择不是“同步一定更好”，而是节省的损耗是否值得增加控制复杂度。
-
-### Boost：只升压，要接受右半平面零点
-
-理想 Boost 的关系为：
+Buck 只降压。Q1 导通时，电感两端为 $V_{in}-V_o$，电流线性上升；Q1 关断时，电感通过 D1 或同步下管续流，电感电压约为 $-V_o$，电流线性下降。对电感做一周期伏秒平衡：
 
 $$
-V_{out}=\frac{V_{in}}{1-D}
+V_o=D V_{in}
 $$
 
-主开关导通时，输入给电感储能，二极管截止，输出暂时由电容维持；主开关关断后，电感电压翻转并与输入叠加，能量才送到输出。
+$$
+\Delta I_L=\frac{(V_{in}-V_o)D}{L f_s}
+=\frac{V_o(1-D)}{L f_s}
+$$
 
-![Boost 功率级（TI《Power Topologies Handbook》SLYU036A，第 21 页局部）](/images/myimge/power-topologies/boost-converter-schematic.png)
+![Buck 电感电压、电流在 CCM、DCM 和强制 PWM 下的理论波形（TI 手册第 14～15 页局部）](/images/myimge/power-topologies/buck-inductor-waveforms.png)
 
-这个“先储能、后送出”的过程带来一个控制上的关键限制：CCM Boost 存在右半平面零点。控制器若突然增大占空比，当前周期留给输出传能的关断时间反而先缩短，输出会短暂向期望方向的反面变化。因此环路带宽必须避开右半平面零点，不能只看功率级的 LC 谐振点。
+上半部分红色电压在 $t_1$ 为正、在 $t_2$ 为负，因此蓝色电感电流先升后降。CCM 波形有正的谷值；DCM 在 $t_3$ 贴近零；同步强制 PWM 允许电流穿过零点变为负值，轻载时可能把能量送回输入。异步 Buck 结构简单，同步 Buck 用 MOSFET 替代续流二极管，低压大电流时效率更高，但必须处理死区、体二极管导通和反向电流。
 
-Boost 还缺少天然的输入到输出关断能力。即使 MOSFET 不开通，输入仍可能经电感和二极管连到输出。需要真正断开输出时，应增加负载开关、背靠背 MOSFET，或选择本身支持断开的方案。
+### 2. Boost：导通储能，关断升压
 
-### 输入会跨过输出：Buck-Boost、SEPIC、Cuk 与 Zeta
+![Boost 功率级（TI 手册第 21 页局部）](/images/myimge/power-topologies/boost-converter-schematic.png)
 
-这组拓扑都能升降压，但输出极性和端口电流特性不同。在理想 CCM 条件下，反相 Buck-Boost、SEPIC、Cuk 和 Zeta 的变换比绝对值都与 $D/(1-D)$ 有关。
+Q1 导通时，D1 截止，电感承受 $V_{in}$ 并储能，输出暂时由 $C_o$ 供电；Q1 关断后，电感电压翻转，与输入串联向输出送能。理想 CCM 关系为：
 
-| 拓扑 | 输出极性 | 主要特征 | 主要代价 |
-|---|---|---|---|
-| 反相 Buck-Boost | 反相 | 器件少，可升可降 | 输出地电位改变，开关与二极管应力较高，CCM 有右半平面零点 |
-| SEPIC | 同相 | 输入电流连续，可升可降 | 两个电感和耦合电容，器件 RMS 电流与损耗上升 |
-| Cuk | 反相 | 输入、输出电流都可较连续 | 两个电感和能量传递电容，器件数与应力增加 |
-| Zeta | 同相 | 可升可降，输出电流连续 | 输入电流脉动，磁性器件和耦合电容增加 |
+$$
+V_o=\frac{V_{in}}{1-D},\qquad
+\Delta I_L=\frac{V_{in}D}{L f_s}
+$$
 
-![SEPIC 功率级（TI《Power Topologies Handbook》SLYU036A，第 35 页局部）](/images/myimge/power-topologies/sepic-converter-schematic.png)
+![Boost 电感电压与电流的 CCM、DCM 理论波形（TI 手册第 22 页局部）](/images/myimge/power-topologies/boost-inductor-waveforms.png)
 
-SEPIC 常被用在电池或车载输入这类“输入有时高于输出、有时低于输出”的场景。它保持输出同相，但不能把它当成免费的升降压：L1、L2 和耦合电容 C1 都要按纹波与 RMS 电流选型，CCM 下同样存在右半平面零点。若效率和功率密度要求更高，我还会把四开关同步 Buck-Boost 纳入比较，而不是只在这四种经典单开关拓扑中选择。
+CCM 中，电感电流在整个周期连续，但输出只在关断区间接收电感电流。占空比突然增大时，当前周期的关断传能时间反而先缩短，所以 CCM Boost 存在右半平面零点（RHPZ）：
 
-## 三、需要隔离：先区分储能型和直接传能型
+$$
+f_{\mathrm{RHPZ}}\approx\frac{V_o(1-D)^2}{2\pi L I_o}
+$$
 
-### Flyback：开通储能，关断向次级送能
+控制环路交越频率要明显低于它。Boost 还没有天然的输入输出隔断：即使 Q1 永久关断，输入仍可能经 L1、D1 到达输出。
 
-Flyback 可以看作把 Buck-Boost 的储能电感扩展为带多个绕组的耦合电感。主开关导通时，初级电流上升、磁芯储能，次级二极管截止；主开关关断后，绕组电压极性翻转，能量从次级释放到输出。
+### 3. 反相 Buck-Boost：一只电感完成升降压
 
-![Flyback 功率级（TI《Power Topologies Handbook》SLYU036A，第 65 页局部）](/images/myimge/power-topologies/flyback-converter-schematic.png)
+![反相 Buck-Boost 功率级（TI 手册第 28 页局部）](/images/myimge/power-topologies/inverting-buck-boost-schematic.png)
 
-这种结构只需一个主开关，容易得到多路隔离输出，因此常见于适配器、待机电源和辅助电源。它的代价也来自“先存后放”：峰值电流较高，漏感会在关断瞬间制造尖峰，通常要加 RCD、TVS 或有源钳位。CCM Flyback 也有右半平面零点，补偿设计不能照搬 Buck。
+Q1 导通时，输入给 L1 储能，D1 截止；Q1 关断时，L1 通过 D1 向输出释放能量。由于输出参考方向与输入相反，理想关系带负号：
 
-Flyback 图里虽然画着变压器符号，设计时却不能只按普通变压器理解。磁芯气隙、初级电感、峰值磁通、漏感和绕组耦合共同决定储能能力与开关应力。
+$$
+V_o=-\frac{D}{1-D}V_{in},\qquad
+\Delta I_L=\frac{V_{in}D}{L f_s}
+$$
 
-### Forward 家族：开通时直接传能，磁芯需要复位
+![反相 Buck-Boost 电感电压与电流的 CCM、DCM 理论波形（TI 手册第 29 页局部）](/images/myimge/power-topologies/inverting-buck-boost-inductor-waveforms.png)
 
-Forward 在主开关导通时把能量通过变压器送到次级，再由输出电感平滑电流。它不像 Flyback 那样把主要能量先存进磁芯，因此相同条件下更容易降低峰值电流，但多了输出电感和磁芯复位问题。
+红色电感电压在导通时为 $+V_{in}$，关断时约为 $V_o$，所以蓝色电流按两段线性斜率变化。开关和二极管关断电压均接近 $V_{in}+|V_o|$，不是只承受输入或输出。CCM 同样存在 RHPZ，按输出幅值写成：
 
-- 单管 Forward 器件少，但主开关关断电压较高，需要可靠的复位绕组或钳位。
-- 双管 Forward 用两个开关和钳位二极管限制开关电压，驱动与器件数量增加。
-- 有源钳位 Forward 用受控开关回收复位能量，并可能创造软开关条件，但时序和环路更复杂。
+$$
+f_{\mathrm{RHPZ}}\approx\frac{|V_o|(1-D)^2}{2\pi D L I_o}
+$$
 
-我会把 Flyback 与 Forward 的分界理解为：是否值得用更多器件和一个输出电感，换取更直接的能量传递与较低的峰值应力。最终边界仍取决于输入范围、开关频率、散热、磁件和成本，不能只用一个固定功率数字判断。
+它的优势是器件少，代价是反相输出、脉冲输出电流和较高器件应力。
 
-## 四、功率继续上升：让磁芯双向工作
+### 4. SEPIC：同相升降压，输入电流连续
 
-### Push-Pull：两个开关交替激励中心抽头绕组
+![SEPIC 功率级（TI 手册第 35 页局部）](/images/myimge/power-topologies/sepic-converter-schematic.png)
 
-Push-Pull 用两个主开关轮流驱动初级的两半绕组，磁通在两个方向摆动，变压器利用率高于单端结构。低压大电流输入时，它的低侧驱动也比较直接。
+SEPIC 用 L1、L2 和串联耦合电容 C1 把输入与输出的直流分量隔开。Q1 导通时，L1 从输入储能，C1 同时给 L2 储能，D1 截止；Q1 关断时，两只电感共同经 D1 向输出送能。理想 CCM 变换比为：
 
-![Push-Pull 功率级（TI《Power Topologies Handbook》SLYU036A，第 123 页局部）](/images/myimge/power-topologies/push-pull-converter-schematic.png)
+$$
+V_o=\frac{D}{1-D}V_{in}
+$$
 
-真正的难点是对称性。两个驱动脉冲、开关参数和半绕组若不平衡，磁通会逐周期偏移，最终可能造成磁芯偏磁饱和。另一个代价是关断开关承受的电压通常接近两倍输入再叠加尖峰，所以 Push-Pull 并不是输入电压越高越合适。
+在稳态下，C1 的平均电压约等于 $V_{in}$；L1 输入电流连续，适合不希望输入端出现强脉冲电流的场景。以 L1 为例：
 
-### Half-Bridge 与 Full-Bridge：用更多开关换更合理的应力
+$$
+\Delta I_{L1}\approx\frac{V_{in}D}{L_1f_s}
+$$
 
-Half-Bridge 用两个主开关把约一半母线电压施加到变压器初级；Full-Bridge 用四个开关施加正、负母线电压。全桥器件更多、驱动更复杂，却能更充分利用直流母线，适合功率继续提高的场景。
+![SEPIC 输入电感 L1 的电压、电流 CCM 与 DCM 理论波形（TI 手册第 36 页局部）](/images/myimge/power-topologies/sepic-key-waveforms.png)
 
-这时拓扑选择已经不只是器件数量比较，还要同时检查：
+波形说明 L1 电流在 CCM 连续，但二极管电流、Q1 电流和 C1 电流仍是脉冲量；C1 必须按 RMS 电流和纹波而不只是容量选型。其 CCM RHPZ 近似为：
 
-- MOSFET 的电压、电流和开关损耗；
-- 变压器匝比、磁通摆幅、漏感与铜损；
-- 次级整流方式和输出电感 RMS 电流；
-- 驱动隔离、死区与直通保护；
-- 硬开关损耗是否已经限制开关频率。
+$$
+f_{\mathrm{RHPZ}}\approx\frac{V_o(1-D)^2}{2\pi D^2L_1I_o}
+$$
 
-### Phase-Shifted Full-Bridge：调相移，并利用漏感实现 ZVS
+SEPIC 解决了同相升降压，却付出了两个电感、一个能量传递电容以及更高 RMS 电流的代价。
 
-移相全桥（PSFB）的四个开关通常保持近似 50% 占空比，通过两桥臂之间的相移调节变压器有效施加电压的时间。换相过程中，变压器漏感或外加串联电感的能量可用于给 MOSFET 输出电容充放电，从而实现零电压开通（ZVS），降低开关损耗。
+### 5. Cuk：反相升降压，输入和输出电流都较连续
 
-![移相全桥功率级（TI《Power Topologies Handbook》SLYU036A，第 174 页局部）](/images/myimge/power-topologies/phase-shifted-full-bridge-schematic.png)
+![Cuk 功率级（TI 手册第 45 页局部）](/images/myimge/power-topologies/cuk-converter-schematic.png)
 
-ZVS 不是无条件成立。手册这一章的计算假设在 50%～100% 负载范围实现 ZVS；轻载时若换相能量不足，软开关范围会缩小。PSFB 还要处理占空比丢失、次级整流尖峰、环流损耗和两桥臂换相差异，因此它适合用复杂度换效率与功率密度的场景，而不是所有隔离电源的默认答案。
+Cuk 通过 C1 在输入侧 L1 和输出侧 L2 之间传递能量。Q1 导通时，L1 储能，同时 C1 经 Q1、L2 向输出侧送能；Q1 关断时，输入通过 L1、D1 给 C1 补充能量，L2 继续维持负载电流。理想关系为：
 
-## 五、我会怎样缩小选择范围
+$$
+V_o=-\frac{D}{1-D}V_{in}
+$$
 
-把前面的关系压缩成一次初选，可以得到下面这张表：
+![Cuk 输入电感 L1 的电压、电流 CCM 与 DCM 理论波形（TI 手册第 46 页局部）](/images/myimge/power-topologies/cuk-input-inductor-waveforms.png)
 
-| 需求 | 优先比较 | 继续核对的风险 |
+L1 和 L2 分别让输入、输出电流连续，这是 Cuk 相比反相 Buck-Boost 最明显的端口特性。C1 是主能量传递元件，稳态平均电压约为 $V_{in}+|V_o|$，同时承受较大的交流电流。它适合重视输入输出电流连续性的场合，但需要接受反相输出、器件数量和电容应力。
+
+### 6. Zeta：同相升降压，输出电流连续
+
+![Zeta 功率级（TI 手册第 55 页局部）](/images/myimge/power-topologies/zeta-converter-schematic.png)
+
+Zeta 可视为 SEPIC 的互补形式。Q1 导通时，输入经 Q1、C1 和 L2 直接参与向输出传能，同时 L1 建立磁能；Q1 关断时，D1 提供续流路径，L2 继续给负载供电。理想 CCM 关系同样是：
+
+$$
+V_o=\frac{D}{1-D}V_{in}
+$$
+
+![Zeta 输入侧电感 L1 的电压、电流 CCM 与 DCM 理论波形（TI 手册第 56 页局部）](/images/myimge/power-topologies/zeta-input-inductor-waveforms.png)
+
+Zeta 的输出电流由 L2 平滑，因此连续；输入侧开关电流则更脉冲。选择它通常是为了同相升降压和连续输出电流，而不是为了最少器件。L1、L2、C1 的纹波和 RMS 电流仍需要逐一计算。
+
+## 三、Flyback 家族：磁芯先储能，再向次级释放
+
+### 7. 单管 Flyback
+
+![单管 Flyback 功率级（TI 手册第 65 页局部）](/images/myimge/power-topologies/flyback-converter-schematic.png)
+
+Flyback 的磁性器件本质上是带多绕组的储能电感。Q1 导通时，初级承受 $+V_{in}$，初级电流按 $V=L\,di/dt$ 上升；由于绕组同名端关系，次级 D1 反偏，磁芯在气隙中储能。Q1 关断后，绕组电压反向，D1 导通，次级电流从峰值向下下降并给 $C_o$ 和负载供能。
+
+理想 CCM 变换比和初级纹波为：
+
+$$
+V_o=n\frac{D}{1-D}V_{in},\qquad
+\Delta I_p=\frac{V_{in}D}{L_pf_s}
+$$
+
+![Flyback 初级电压、电流在 CCM、DCM 和临界模式下的理论波形（TI 手册第 67 页局部）](/images/myimge/power-topologies/flyback-primary-waveforms.png)
+
+左列 CCM 的初级电流从非零谷值上升，关断后初级开关支路电流立刻为零；中列 DCM 在 $t_3$ 出现磁化电流归零区；右列临界模式刚好在下一周期前降到零。图中的蓝线是初级绕组/开关时段电流，并不表示磁芯能量在关断瞬间消失，而是能量已经转移到次级。
+
+![Flyback 次级绕组电压与整流电流的 CCM 理论波形（TI 手册第 68 页局部）](/images/myimge/power-topologies/flyback-secondary-waveforms.png)
+
+次级电流只出现在 Q1 关断期间，起点约为初级关断电流按匝比反射后的值，再线性下降。输出电容因此要吸收脉冲充电电流。MOSFET 的关断电压不能只按输入选：
+
+$$
+V_{DS,off}\approx V_{in}+\frac{N_p}{N_s}(V_o+V_D)+V_{spike}
+$$
+
+$V_{spike}$ 主要来自漏感，通常由 RCD、TVS 或有源钳位限制。在 DCM 的第一轮能量估算中，每周期储能为 $\tfrac12L_pI_{pk}^2$：
+
+$$
+P_o\approx\eta\frac{1}{2}L_pI_{pk}^2f_s
+$$
+
+CCM Flyback 也有“先缩短次级传能时间”的 RHPZ，补偿带宽需要保守处理。多路输出、器件少和易隔离是它的优势；峰值电流、漏感尖峰、变压器气隙和交叉调整率是主要代价。
+
+### 8. 双管 Flyback：用两个开关钳住电压
+
+![双管 Flyback 功率级（TI 手册第 76 页局部）](/images/myimge/power-topologies/two-switch-flyback-schematic.png)
+
+Q1、Q2 同时导通时，初级承受 $V_{in}$ 并储能；两管同时关断时，D3、D4 把漏感和复位能量送回输入，次级向输出放能。理想变换比仍是：
+
+$$
+V_o=n\frac{D}{1-D}V_{in}
+$$
+
+![双管 Flyback 初级电压、电流的 CCM 与 DCM 理论波形（TI 手册第 78 页局部）](/images/myimge/power-topologies/two-switch-flyback-primary-waveforms.png)
+
+相较单管 Flyback，每只 MOSFET 的理想电压应力被钳在约 $V_{in}$，而不是 $V_{in}$ 再叠加反射输出电压；实际仍要留寄生尖峰裕量。代价是两只功率管、两路驱动和两个钳位二极管，复位要求也通常把占空比限制在 0.5 以下。
+
+## 四、Forward 家族：开通时直接向次级传能
+
+Forward 与 Flyback 的根本差异是能量时序。主开关导通时，变压器立即把能量送到次级，输出电感 L1 负责平滑；关断时，次级整流管截止，续流管让输出电感继续供电。三种 Forward 的理想 CCM 主关系相同：
+
+$$
+V_o\approx DnV_{in}
+$$
+
+$$
+\Delta I_L=\frac{(nV_{in}-V_o)D}{Lf_s}
+=\frac{V_o(1-D)}{Lf_s}
+$$
+
+它们真正不同的是磁化电流怎样复位、主开关承受多高电压，以及能否回收复位能量。
+
+### 9. 有源钳位 Forward
+
+![有源钳位 Forward 功率级（TI 手册第 85 页局部）](/images/myimge/power-topologies/active-clamp-forward-schematic.png)
+
+Q1 导通时，初级加正电压，次级 D1 导通，输出电感电流上升。Q1 关断后，钳位管 Q2 与 C1 给磁化电流提供通路，初级出现反向复位电压；次级转入 D2 续流，输出电感电流下降。理想稳态钳位电容电压可近似理解为：
+
+$$
+V_{clamp}\approx\frac{V_{in}}{1-D}
+$$
+
+![有源钳位 Forward 的初级与输出电感关键理论波形，上半为变压器初级，下半为输出电感（TI 手册第 87、89 页局部）](/images/myimge/power-topologies/active-clamp-forward-key-waveforms.png)
+
+上半图中，初级电压在 $t_1$ 为正、$t_2$ 为负，负电压完成磁通复位；初级电流在关断区间仍可沿钳位支路流动。下半图中，输出电感电压一正一负，对应连续的三角电流。有源钳位可以回收磁化和漏感能量，并在合适的寄生参数、负载和死区条件下形成 ZVS，但不能只凭拓扑名称保证全负载软开关。
+
+### 10. 单管 Forward
+
+![单管 Forward 功率级（TI 手册第 98 页局部）](/images/myimge/power-topologies/single-switch-forward-schematic.png)
+
+单管 Forward 用复位绕组 $N_d$ 和二极管 D3 在 Q1 关断后给初级施加反向电压。若 $N_d=N_p$，复位时间至少等于导通时间，因此：
+
+$$
+D_{max}\le\frac{N_p}{N_p+N_d}=0.5
+$$
+
+主开关理想关断应力近似为：
+
+$$
+V_{DS,max}\approx V_{in}\left(1+\frac{N_p}{N_d}\right)
+$$
+
+一比一复位绕组时约为 $2V_{in}$，还要再计漏感尖峰。
+
+![单管 Forward 的初级复位与输出电感关键理论波形，上半为变压器初级，下半为输出电感（TI 手册第 100、102 页局部）](/images/myimge/power-topologies/single-switch-forward-key-waveforms.png)
+
+初级红色波形在 $t_1$ 为 $+V_{in}$，随后在复位区间 $t_d$ 为负；伏秒面积必须相等，否则磁通会逐周期偏移。输出电感的蓝色电流在 CCM 不归零，在 DCM 则经历上升、下降和零电流三个区间。
+
+### 11. 双管 Forward
+
+![双管 Forward 功率级（TI 手册第 111 页局部）](/images/myimge/power-topologies/two-switch-forward-schematic.png)
+
+Q1、Q2 同时导通，把输入电压加到初级；关断后 D3、D4 同时导通，把磁化能量回送输入，并将两只 MOSFET 的理想关断电压各自钳在约 $V_{in}$。输出侧仍是 D1 整流、D2 续流，所以变换比仍为 $V_o\approx DnV_{in}$。
+
+![双管 Forward 的初级与输出电感关键理论波形，上半为变压器初级，下半为输出电感（TI 手册第 113、115 页局部）](/images/myimge/power-topologies/two-switch-forward-key-waveforms.png)
+
+初级波形有正向传能和负向复位两段，因此占空比通常小于 0.5。它比单管方案多一只 MOSFET 和一路驱动，却显著降低单管电压应力，且钳位路径明确，适合较高输入电压的硬开关 Forward。
+
+## 五、双端与桥式拓扑：让变压器双向励磁
+
+### 12. Push-Pull：两半初级交替工作
+
+![Push-Pull 功率级（TI 手册第 123 页局部）](/images/myimge/power-topologies/push-pull-converter-schematic.png)
+
+Q1、Q2 交替导通，每次驱动中心抽头初级的一半，次级经全波整流后向输出电感送能。若 $D$ 表示每只开关相对完整周期的导通占比，则每周期有两个传能脉冲：
+
+$$
+V_o\approx2DnV_{in},\qquad D<0.5
+$$
+
+![Push-Pull 的初级与输出电感关键理论波形，上半为变压器初级，下半为输出电感（TI 手册第 125、129 页局部）](/images/myimge/power-topologies/push-pull-key-waveforms.png)
+
+初级红色电压正负交替，磁芯双向励磁；次级整流后，输出电感每周期得到两次正向电压脉冲。两路驱动、开关参数或半绕组匝数稍有不对称，都可能产生伏秒不平衡并推动磁芯偏磁。关断开关电压通常接近 $2V_{in}$ 再叠加尖峰，因此它更适合低压、大电流输入，而不是高压母线。
+
+### 13. Half-Bridge：初级得到正负半母线电压
+
+![Half-Bridge 功率级（TI 手册第 148 页局部）](/images/myimge/power-topologies/half-bridge-schematic.png)
+
+两个 MOSFET 交替导通，分压电容把初级一端维持在母线中点，因此变压器承受约 $+V_{in}/2$ 和 $-V_{in}/2$。若 $D$ 是每只开关在完整周期中的导通占比，则：
+
+$$
+V_o\approx DnV_{in}
+$$
+
+![Half-Bridge 的初级与输出电感关键理论波形，上半为变压器初级，下半为输出电感（TI 手册第 150、153 页局部）](/images/myimge/power-topologies/half-bridge-key-waveforms.png)
+
+上半图的初级电压幅值只有半母线，但正负交替；下半图显示次级全波整流后，输出电感在两个传能区间上升，在间隔区间下降。每只 MOSFET 的关断电压约为 $V_{in}$。设计重点是分压电容的容量、纹波电流和中点平衡，任何长期直流偏置都会影响磁通对称性。
+
+### 14. Full-Bridge：初级得到完整正负母线电压
+
+![Full-Bridge 功率级（TI 手册第 161 页局部）](/images/myimge/power-topologies/full-bridge-schematic.png)
+
+两组对角管交替导通，初级得到 $+V_{in}$ 和 $-V_{in}$。若 $D$ 表示每组对角管相对完整周期的导通占比，则：
+
+$$
+V_o\approx2DnV_{in}
+$$
+
+![Full-Bridge 的初级与输出电感关键理论波形，上半为变压器初级，下半为输出电感（TI 手册第 163、166 页局部）](/images/myimge/power-topologies/full-bridge-key-waveforms.png)
+
+它与 Half-Bridge 的波形形状相似，但初级电压幅值翻倍，因此同一母线和匝比下可以传递更高功率。每只 MOSFET 仍主要承受母线电压。代价是四只功率管、两组高侧驱动以及严格的死区和直通保护；硬开关时，开关损耗也会限制频率。
+
+### 15. Phase-Shifted Full-Bridge：用相移调节有效脉宽
+
+![移相全桥功率级（TI 手册第 174 页局部）](/images/myimge/power-topologies/phase-shifted-full-bridge-schematic.png)
+
+PSFB 的每只 MOSFET 通常保持接近 50% 占空比，控制量是两桥臂之间的相移。桥臂状态相反时，初级得到 $+V_{in}$ 或 $-V_{in}$；两桥臂同为高电平或同为低电平时，初级电压为零，电流在桥内续流。定义变压器的有效占空比为 $D_{eff}$：
+
+$$
+V_o\approx D_{eff}nV_{in}
+$$
+
+![PSFB 的初级相移与输出电感关键理论波形，上半为变压器初级，下半为输出电感（TI 手册第 175、177 页局部）](/images/myimge/power-topologies/phase-shifted-full-bridge-key-waveforms.png)
+
+上半图的 $t_{ph}$ 是相移造成的零电压续流区间；相移越大，有效加在变压器上的脉宽越短。初级电流在零电压区仍可能循环，这部分电流不向输出传递有效功率，却会增加导通损耗。换相时，漏感或外加串联电感的能量可以给 MOSFET 输出电容充放电，形成 ZVS。一个直观的必要条件是：
+
+$$
+\frac12L_{eq}I_{pri}^2\gtrsim\frac12C_{oss,eq}V_{in}^2
+$$
+
+负载变轻后 $I_{pri}$ 下降，换相能量可能不足，ZVS 会丢失。TI 手册这一章的计算前提是约 50%～100% 负载实现 ZVS，不能把它外推成全负载保证。PSFB 还要检查环流、占空比丢失、次级整流尖峰和领先/滞后桥臂的换相差异。
+
+## 六、把拓扑放到同一张选择表里
+
+| 需求 | 优先比较 | 关键代价 |
 |---|---|---|
-| 非隔离，稳定降压 | Buck、同步 Buck | 最大占空比、低压大电流损耗、负载瞬态 |
-| 非隔离，稳定升压 | Boost | 关断能力、右半平面零点、开关与二极管电压应力 |
-| 非隔离，输入跨过输出 | 四开关 Buck-Boost、SEPIC、Zeta；允许反相时再看 Buck-Boost/Cuk | RMS 电流、耦合电容、效率和控制带宽 |
-| 隔离，器件数优先 | Flyback | 峰值电流、漏感尖峰、钳位损耗、交叉调整率 |
-| 隔离，希望直接传能 | 单管/双管/有源钳位 Forward | 磁芯复位、输出电感、开关应力 |
-| 低压大电流输入、适合中心抽头磁件 | Push-Pull | 磁通不平衡、双倍输入电压应力 |
-| 较高功率隔离变换 | Half-Bridge、Full-Bridge | 驱动复杂度、硬开关损耗、磁件设计 |
-| 较高功率且希望扩大软开关范围 | PSFB | 轻载 ZVS、环流、占空比丢失、次级尖峰 |
+| 非隔离、固定降压 | Buck、同步 Buck | 最大占空比、低压大电流损耗、负载瞬态 |
+| 非隔离、固定升压 | Boost | RHPZ、输出不可天然关断、器件电压应力 |
+| 输入跨过输出、允许反相 | 反相 Buck-Boost、Cuk | 反相输出、RHPZ或能量电容应力 |
+| 输入跨过输出、要求同相 | SEPIC、Zeta | 两个电感、耦合电容、RMS 电流 |
+| 隔离、器件数优先 | 单管 Flyback | 峰值电流、漏感尖峰、气隙、交叉调整率 |
+| 隔离、希望降低单管应力 | 双管 Flyback | 两只开关、驱动和占空比限制 |
+| 隔离、开通时直接传能 | 单管/双管/有源钳位 Forward | 磁芯复位、输出电感、钳位设计 |
+| 低压大电流输入 | Push-Pull | 偏磁、开关约两倍输入电压应力 |
+| 较高功率隔离 | Half-Bridge、Full-Bridge | 驱动复杂度、磁通平衡、硬开关损耗 |
+| 较高功率且希望软开关 | PSFB | 轻载 ZVS、环流、占空比丢失 |
 
-这张表只能完成初选。确定候选拓扑后，我还会按最差输入电压、最大负载和允许温升继续计算：
+初选以后，我会按同一顺序继续计算：先用伏秒平衡得到占空比和电感纹波，再计算每只 MOSFET、二极管、绕组和电容的峰值及 RMS 电流；随后加入漏感、寄生电容、死区和压降重新检查应力；最后建立小信号模型，确认 RHPZ、交越频率和相位裕量，并通过样机验证效率、温升、纹波、负载瞬态、启动与保护。
 
-1. 用伏秒平衡求占空比范围与电感纹波；
-2. 用电荷平衡检查输出电容纹波；
-3. 计算 MOSFET、二极管、绕组与电容的峰值和 RMS 电流；
-4. 加入漏感、寄生电容、死区和器件压降，重新检查电压应力；
-5. 建立小信号模型，确认右半平面零点、交越频率和相位裕量；
-6. 最后用原型机验证效率、温升、纹波、负载瞬态、启动和短路保护。
-
-## 六、这份手册适合放在设计流程的哪一步
-
-《Power Topologies Handbook》的价值不是替控制器数据手册完成整个电源设计，而是提供统一的第一轮计算。输入输出条件确定后，可以从对应章节得到 CCM、DCM 与临界模式下的电流时间、峰值、平均值和 RMS 值，再把结果带入器件、磁件与热设计。
-
-真正落到硬件时，还需要具体控制器的数据手册、磁芯资料、MOSFET 与二极管的温度特性，并通过仿真和样机测试闭环验证。本文目前完成的是拓扑关系和选择路径的整理，不包含某个具体电源参数的器件选型，也不把理想公式当成最终设计结果。
+这篇文章完成的是拓扑结构、理想关系和理论波形的对应。它可以用于缩小候选范围，但不能代替具体控制器数据手册、磁芯设计和硬件实测。
 
 ## 参考资料
 
