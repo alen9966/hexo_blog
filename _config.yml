@@ -92,6 +92,10 @@ ignore:
 # Extensions
 theme: reimu
 
+# Preserve LaTeX delimiters for the Reimu theme's MathJax renderer.
+markdown_it_plus:
+  rawLaTeX: true
+
 # Deployment
 deploy:
   type: git
