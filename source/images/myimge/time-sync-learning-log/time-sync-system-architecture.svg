@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">时间同步系统的输入、驯服、保持与输出</title>
+  <desc id="desc">卫星、网络和B码输入经过时间解算与本地振荡器驯服后输出多种授时信号</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff8fa"/><stop offset="1" stop-color="#eef6ff"/></linearGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#41577a" flood-opacity="0.13"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#6c84a6"/></marker>
+  </defs>
+  <rect width="1200" height="690" rx="28" fill="url(#bg)"/>
+  <text x="600" y="60" text-anchor="middle" fill="#203957" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="34" font-weight="700">时间同步系统：输入、解算、驯服与分配</text>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" text-anchor="middle">
+    <g filter="url(#s)">
+      <rect x="70" y="125" width="230" height="105" rx="20" fill="#fff" stroke="#f19ab0" stroke-width="3"/>
+      <rect x="70" y="292" width="230" height="105" rx="20" fill="#fff" stroke="#80b4ef" stroke-width="3"/>
+      <rect x="70" y="459" width="230" height="105" rx="20" fill="#fff" stroke="#a692e5" stroke-width="3"/>
+    </g>
+    <text x="185" y="168" fill="#253d5d" font-size="25" font-weight="700">GNSS / 北斗</text>
+    <text x="185" y="204" fill="#6b7d94" font-size="20">1PPS + TOD</text>
+    <text x="185" y="335" fill="#253d5d" font-size="25" font-weight="700">网络授时</text>
+    <text x="185" y="371" fill="#6b7d94" font-size="20">NTP / PTP</text>
+    <text x="185" y="502" fill="#253d5d" font-size="25" font-weight="700">串行时间码</text>
+    <text x="185" y="538" fill="#6b7d94" font-size="20">IRIG-B（BDC / BAC）</text>
+
+    <g filter="url(#s)">
+      <rect x="415" y="205" width="270" height="116" rx="22" fill="#fff" stroke="#74c9bb" stroke-width="3"/>
+      <rect x="415" y="388" width="270" height="116" rx="22" fill="#fff" stroke="#f1b465" stroke-width="3"/>
+    </g>
+    <text x="550" y="251" fill="#253d5d" font-size="25" font-weight="700">时间解算与偏差测量</text>
+    <text x="550" y="288" fill="#6b7d94" font-size="20">相位差 / 频率差 / 路径时延</text>
+    <text x="550" y="434" fill="#253d5d" font-size="25" font-weight="700">本地高稳时钟</text>
+    <text x="550" y="471" fill="#6b7d94" font-size="20">OCXO · 驯服 · 守时</text>
+
+    <g filter="url(#s)">
+      <rect x="800" y="145" width="310" height="390" rx="26" fill="#fff" stroke="#7e9edd" stroke-width="3"/>
+    </g>
+    <text x="955" y="196" fill="#253d5d" font-size="27" font-weight="700">同步输出与设备时钟</text>
+    <g fill="#f5f8ff" stroke="#c5d3ea" stroke-width="2">
+      <rect x="850" y="235" width="210" height="55" rx="15"/>
+      <rect x="850" y="311" width="210" height="55" rx="15"/>
+      <rect x="850" y="387" width="210" height="55" rx="15"/>
+      <rect x="850" y="463" width="210" height="55" rx="15"/>
+    </g>
+    <text x="955" y="270" fill="#425b7a" font-size="21">1PPS / TOD</text>
+    <text x="955" y="346" fill="#425b7a" font-size="21">IRIG-B</text>
+    <text x="955" y="422" fill="#425b7a" font-size="21">NTP / PTP</text>
+    <text x="955" y="498" fill="#425b7a" font-size="21">10 MHz / 100 MHz</text>
+  </g>
+  <g fill="none" stroke="#6c84a6" stroke-width="4" marker-end="url(#arrow)">
+    <path d="M300 178H360Q385 178 385 230V245Q385 263 415 263"/>
+    <path d="M300 345H415"/>
+    <path d="M300 512H360Q385 512 385 472V455Q385 446 415 446"/>
+    <path d="M550 321V388"/>
+    <path d="M685 263H735Q760 263 760 310V340H800"/>
+    <path d="M685 446H735Q760 446 760 380V365H800"/>
+  </g>
+  <text x="600" y="640" text-anchor="middle" fill="#778aa2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="20">外部时间源决定长期准确度，本地振荡器决定短期稳定度与失锁后的保持能力。</text>
+</svg>

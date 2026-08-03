@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">100 MHz参考时钟的通用功能链路</title>
+  <desc id="desc">OCXO经二路功分后分别进入射频输出和数字整形路径，DAC和TDC构成校准与测量环节</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9fbff"/><stop offset="1" stop-color="#fff5f8"/></linearGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#526883" flood-opacity="0.14"/></filter>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#67809f"/></marker>
+  </defs>
+  <rect width="1200" height="620" rx="28" fill="url(#bg)"/>
+  <text x="600" y="62" text-anchor="middle" fill="#203957" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="34" font-weight="700">100 MHz 参考时钟：先按功能理解信号链</text>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" text-anchor="middle" filter="url(#s)">
+    <rect x="70" y="210" width="230" height="125" rx="22" fill="#fff" stroke="#f19ab0" stroke-width="3"/>
+    <rect x="375" y="210" width="230" height="125" rx="22" fill="#fff" stroke="#7fb3ec" stroke-width="3"/>
+    <rect x="700" y="120" width="250" height="115" rx="22" fill="#fff" stroke="#74c9bb" stroke-width="3"/>
+    <rect x="700" y="315" width="250" height="115" rx="22" fill="#fff" stroke="#a692e5" stroke-width="3"/>
+    <rect x="1005" y="315" width="150" height="115" rx="22" fill="#fff" stroke="#f1b465" stroke-width="3"/>
+    <rect x="160" y="455" width="225" height="95" rx="20" fill="#fff" stroke="#f1b465" stroke-width="3"/>
+    <rect x="460" y="455" width="225" height="95" rx="20" fill="#fff" stroke="#7fb3ec" stroke-width="3"/>
+  </g>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" text-anchor="middle">
+    <text x="185" y="258" fill="#253d5d" font-size="25" font-weight="700">100 MHz OCXO</text>
+    <text x="185" y="296" fill="#6b7d94" font-size="19">高稳定参考频率源</text>
+    <text x="490" y="258" fill="#253d5d" font-size="25" font-weight="700">二路 50 Ω 功分器</text>
+    <text x="490" y="296" fill="#6b7d94" font-size="19">功率分配 + 端口匹配</text>
+    <text x="825" y="165" fill="#253d5d" font-size="24" font-weight="700">射频输出 / 测试支路</text>
+    <text x="825" y="202" fill="#6b7d94" font-size="19">幅度、频谱、相噪</text>
+    <text x="825" y="360" fill="#253d5d" font-size="24" font-weight="700">施密特触发整形</text>
+    <text x="825" y="397" fill="#6b7d94" font-size="19">获得稳定数字边沿</text>
+    <text x="1080" y="360" fill="#253d5d" font-size="23" font-weight="700">后级逻辑</text>
+    <text x="1080" y="397" fill="#6b7d94" font-size="18">计数 / 分频</text>
+    <text x="272" y="493" fill="#253d5d" font-size="23" font-weight="700">16 位 DAC</text>
+    <text x="272" y="525" fill="#6b7d94" font-size="18">校准控制量（待核对）</text>
+    <text x="572" y="493" fill="#253d5d" font-size="23" font-weight="700">TDC</text>
+    <text x="572" y="525" fill="#6b7d94" font-size="18">时间间隔测量（待核对）</text>
+  </g>
+  <g fill="none" stroke="#67809f" stroke-width="4" marker-end="url(#a)">
+    <path d="M300 272H375"/>
+    <path d="M605 252H650Q665 252 665 178H700"/>
+    <path d="M605 294H650Q665 294 665 373H700"/>
+    <path d="M950 373H1005"/>
+    <path d="M272 455V385Q272 365 235 365V335" stroke-dasharray="9 8"/>
+    <path d="M572 455V405Q572 385 610 385H700" stroke-dasharray="9 8"/>
+  </g>
+  <text x="600" y="590" text-anchor="middle" fill="#778aa2" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="19">虚线表示本次学习中推测的校准/测量关系，实际闭环连接仍需结合完整原理图和软件逻辑确认。</text>
+</svg>
