@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-labelledby="title desc">
+  <title id="title">用1 MΩ和50 Ω双负载法估算输出阻抗</title>
+  <desc id="desc">同一个戴维南信号源分别接入示波器高阻输入和50欧姆终端</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff8fb"/><stop offset="1" stop-color="#eef6ff"/></linearGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#41577a" flood-opacity="0.12"/></filter>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#607a9e"/></marker>
+  </defs>
+  <rect width="1200" height="620" rx="28" fill="url(#bg)"/>
+  <text x="600" y="58" text-anchor="middle" fill="#203957" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="32" font-weight="700">双负载法：两次测量改变的是同一个信号源的负载</text>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" text-anchor="middle">
+    <g filter="url(#s)">
+      <rect x="55" y="120" width="500" height="400" rx="28" fill="#fff" stroke="#f19ab0" stroke-width="3"/>
+      <rect x="645" y="120" width="500" height="400" rx="28" fill="#fff" stroke="#78aee9" stroke-width="3"/>
+    </g>
+    <text x="305" y="170" fill="#334d6d" font-size="26" font-weight="700">第一次：示波器 1 MΩ 输入</text>
+    <text x="895" y="170" fill="#334d6d" font-size="26" font-weight="700">第二次：示波器 50 Ω 终端</text>
+    <circle cx="140" cy="315" r="48" fill="#fff5f8" stroke="#f06c8d" stroke-width="4"/>
+    <path d="M105 315C118 278 132 352 145 315S172 278 185 315" fill="none" stroke="#f06c8d" stroke-width="5"/>
+    <circle cx="730" cy="315" r="48" fill="#f2f8ff" stroke="#6d9cff" stroke-width="4"/>
+    <path d="M695 315C708 278 722 352 735 315S762 278 775 315" fill="none" stroke="#6d9cff" stroke-width="5"/>
+    <rect x="235" y="278" width="92" height="74" rx="14" fill="#fff3e4" stroke="#e7a94f" stroke-width="3"/>
+    <rect x="825" y="278" width="92" height="74" rx="14" fill="#fff3e4" stroke="#e7a94f" stroke-width="3"/>
+    <text x="281" y="309" fill="#825a22" font-size="20">Zout</text><text x="281" y="337" fill="#825a22" font-size="19">R + jX</text>
+    <text x="871" y="309" fill="#825a22" font-size="20">Zout</text><text x="871" y="337" fill="#825a22" font-size="19">R + jX</text>
+    <rect x="410" y="257" width="105" height="116" rx="16" fill="#f8f9fc" stroke="#93a5bb" stroke-width="3"/>
+    <rect x="1000" y="257" width="105" height="116" rx="16" fill="#f8f9fc" stroke="#93a5bb" stroke-width="3"/>
+    <text x="462" y="302" fill="#405674" font-size="24" font-weight="700">1 MΩ</text><text x="462" y="338" fill="#74859b" font-size="18">近似开路</text>
+    <text x="1052" y="302" fill="#405674" font-size="24" font-weight="700">50 Ω</text><text x="1052" y="338" fill="#74859b" font-size="18">匹配负载</text>
+    <text x="305" y="438" fill="#60748d" font-size="21">读数接近开路电压 Vopen</text>
+    <text x="895" y="438" fill="#60748d" font-size="21">读数为带载电压 V50</text>
+  </g>
+  <g fill="none" stroke="#607a9e" stroke-width="4" marker-end="url(#a)">
+    <path d="M188 315H235"/><path d="M327 315H410"/>
+    <path d="M778 315H825"/><path d="M917 315H1000"/>
+  </g>
+  <text x="600" y="575" text-anchor="middle" fill="#6c7f98" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="21">纯电阻源可直接反推 Rout；存在明显虚部时，仅凭两次幅值不能恢复完整复阻抗。</text>
+</svg>
