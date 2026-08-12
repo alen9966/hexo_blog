@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="650" viewBox="0 0 1400 650">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff8fb"/>
+      <stop offset="1" stop-color="#f4f8ff"/>
+    </linearGradient>
+    <marker id="pink" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto"><path d="M0 0L12 6L0 12Z" fill="#d56f9e"/></marker>
+    <marker id="blue" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto"><path d="M0 0L12 6L0 12Z" fill="#568fbe"/></marker>
+    <style>
+      .title{font:700 34px 'Microsoft YaHei',sans-serif;fill:#383b46}
+      .head{font:700 27px 'Microsoft YaHei',sans-serif;fill:#343846}
+      .text{font:400 23px 'Microsoft YaHei',sans-serif;fill:#4e5566}
+      .math{font:italic 30px Georgia,serif;fill:#343846}
+      .port{fill:#fff;stroke:#8994a8;stroke-width:3}
+      .net{fill:#fff;stroke:#b887aa;stroke-width:4;rx:28}
+      .in{stroke:#d56f9e;stroke-width:5;fill:none;marker-end:url(#pink)}
+      .out{stroke:#568fbe;stroke-width:5;fill:none;marker-end:url(#blue)}
+    </style>
+  </defs>
+  <rect width="1400" height="650" rx="28" fill="url(#bg)"/>
+  <text x="700" y="60" text-anchor="middle" class="title">双端口网络中的入射波、出射波与 S 参数</text>
+  <rect x="490" y="145" width="420" height="270" class="net"/>
+  <text x="700" y="250" text-anchor="middle" class="head">被测网络 DUT</text>
+  <text x="700" y="302" text-anchor="middle" class="math">b = S a</text>
+  <text x="700" y="354" text-anchor="middle" class="text">线性条件下，出射波由各端口入射波共同决定</text>
+  <rect x="420" y="245" width="70" height="70" class="port"/>
+  <text x="455" y="288" text-anchor="middle" class="head">1</text>
+  <rect x="910" y="245" width="70" height="70" class="port"/>
+  <text x="945" y="288" text-anchor="middle" class="head">2</text>
+
+  <path d="M100 205H420" class="in"/>
+  <text x="255" y="180" text-anchor="middle" class="math">a₁</text>
+  <path d="M420 350H100" class="out"/>
+  <text x="255" y="395" text-anchor="middle" class="math">b₁</text>
+  <path d="M1300 350H980" class="in"/>
+  <text x="1140" y="395" text-anchor="middle" class="math">a₂</text>
+  <path d="M980 205H1300" class="out"/>
+  <text x="1140" y="180" text-anchor="middle" class="math">b₂</text>
+
+  <text x="125" y="475" class="head">下标读法</text>
+  <text x="125" y="520" class="text">Sᵢⱼ：第一个下标 i 是响应端口，第二个下标 j 是激励端口</text>
+  <text x="125" y="565" class="text">S₁₁、S₂₂ 描述反射；S₂₁、S₁₂ 描述正向与反向传输</text>
+  <text x="125" y="610" class="text">测量某个 S 参数时，未激励端口按定义应由参考阻抗匹配</text>
+</svg>

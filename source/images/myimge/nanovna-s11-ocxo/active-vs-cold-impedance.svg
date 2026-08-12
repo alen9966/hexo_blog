@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="760" viewBox="0 0 1500 760">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff9fc"/><stop offset="1" stop-color="#f2f7ff"/></linearGradient>
+    <marker id="arr" markerWidth="11" markerHeight="11" refX="10" refY="5.5" orient="auto"><path d="M0 0L11 5.5L0 11Z" fill="#59657a"/></marker>
+    <style>
+      .title{font:700 34px 'Microsoft YaHei',sans-serif;fill:#383b46}
+      .head{font:700 28px 'Microsoft YaHei',sans-serif;fill:#343846}
+      .text{font:400 22px 'Microsoft YaHei',sans-serif;fill:#525a6c}
+      .value{font:700 29px 'Microsoft YaHei',sans-serif;fill:#b65787}
+      .card{fill:#fff;stroke:#d9a0bd;stroke-width:3;rx:28}
+      .card2{fill:#fff;stroke:#8db2d6;stroke-width:3;rx:28}
+      .box{fill:#fafbff;stroke:#9aa4b5;stroke-width:2;rx:15}
+      .line{stroke:#59657a;stroke-width:4;fill:none;marker-end:url(#arr)}
+      .dash{stroke:#af7c99;stroke-width:3;stroke-dasharray:10 8}
+    </style>
+  </defs>
+  <rect width="1500" height="760" rx="28" fill="url(#bg)"/>
+  <text x="750" y="58" text-anchor="middle" class="title">两种方法看到的不是同一个阻抗</text>
+
+  <rect x="70" y="105" width="650" height="565" class="card"/>
+  <text x="395" y="160" text-anchor="middle" class="head">双负载法：工作状态下的等效源阻抗</text>
+  <rect x="125" y="225" width="175" height="82" class="box"/><text x="213" y="275" text-anchor="middle" class="text">OCXO 输出源</text>
+  <path d="M300 266H385" class="line"/>
+  <rect x="385" y="225" width="130" height="82" class="box"/><text x="450" y="275" text-anchor="middle" class="text">输出网络</text>
+  <path d="M515 266H600" class="line"/>
+  <rect x="600" y="210" width="70" height="112" class="box"/><text x="635" y="255" text-anchor="middle" class="text">1 MΩ</text><text x="635" y="290" text-anchor="middle" class="text">50 Ω</text>
+  <text x="395" y="390" text-anchor="middle" class="value">结果约为 50 Ω</text>
+  <text x="120" y="445" class="text">• 板子正常上电，OCXO 输出级处于工作偏置</text>
+  <text x="120" y="490" class="text">• 比较两种负载下的电压幅值</text>
+  <text x="120" y="535" class="text">• 纯电阻近似下得到戴维南等效源阻抗</text>
+  <text x="120" y="580" class="text">• 不保留相位，不能单独求出 R 和 X</text>
+
+  <rect x="780" y="105" width="650" height="565" class="card2"/>
+  <text x="1105" y="160" text-anchor="middle" class="head">NanoVNA：断电时从 SMA 向内看的输入阻抗</text>
+  <rect x="825" y="225" width="150" height="82" class="box"/><text x="900" y="275" text-anchor="middle" class="text">NanoVNA</text>
+  <path d="M975 266H1030" class="line"/>
+  <rect x="1030" y="225" width="100" height="82" class="box"/><text x="1080" y="275" text-anchor="middle" class="text">SMA</text>
+  <path d="M1130 266H1185" class="line"/>
+  <rect x="1185" y="210" width="185" height="112" class="box"/><text x="1278" y="255" text-anchor="middle" class="text">耦合 / 滤波</text><text x="1278" y="290" text-anchor="middle" class="text">功分 / 冷态端口</text>
+  <line x1="1030" y1="190" x2="1130" y2="190" class="dash"/>
+  <text x="1080" y="185" text-anchor="middle" class="text">校准参考面</text>
+  <text x="1105" y="390" text-anchor="middle" class="value">39.38 + j2.689 Ω @ 100 MHz</text>
+  <text x="830" y="445" class="text">• 整板断电，VNA 主动向网络注入小信号</text>
+  <text x="830" y="490" class="text">• 测得复数 S₁₁，再换算成 R+jX</text>
+  <text x="830" y="535" class="text">• 包含滤波器、耦合电容、功分器及冷态端口</text>
+  <text x="830" y="580" class="text">• 不能直接代替 OCXO 工作状态下的源阻抗</text>
+
+  <text x="750" y="720" text-anchor="middle" class="head">测量结果不同，首先应检查测量对象和工作状态是否相同</text>
+</svg>
