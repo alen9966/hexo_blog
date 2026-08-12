@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="470" viewBox="0 0 1220 470">
+  <defs>
+    <style>
+      .t{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#28344a}.title{font-size:29px;font-weight:700}.mid{font-size:21px;font-weight:600}.small{font-size:18px}
+      .box{fill:#fff;stroke:#8291aa;stroke-width:2}.pink{fill:#fff0f6;stroke:#d65c8c;stroke-width:2}.blue{fill:#eef4ff;stroke:#6688cf;stroke-width:2}.future{fill:#fffaf0;stroke:#d29c41;stroke-width:2;stroke-dasharray:8 6}.line{stroke:#50617d;stroke-width:3;fill:none}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#50617d"/></marker>
+  </defs>
+  <rect width="1220" height="470" rx="28" fill="#f8faff"/>
+  <text x="610" y="45" text-anchor="middle" class="t title">本次 100 MHz OCXO 输出与相噪测试链路</text>
+  <rect x="35" y="183" width="145" height="82" rx="16" class="pink"/>
+  <text x="108" y="216" text-anchor="middle" class="t mid">OCXO</text><text x="108" y="246" text-anchor="middle" class="t small">100 MHz</text>
+  <rect x="230" y="183" width="150" height="82" rx="16" class="box"/>
+  <text x="305" y="231" text-anchor="middle" class="t mid">功分器</text>
+  <path d="M180 224 H230" class="line" marker-end="url(#a)"/>
+  <path d="M380 224 H435 V112 H485" class="line" marker-end="url(#a)"/>
+  <rect x="485" y="70" width="155" height="82" rx="16" class="box"/>
+  <text x="562" y="104" text-anchor="middle" class="t mid">比较器</text><text x="562" y="133" text-anchor="middle" class="t small">返回 FPGA</text>
+  <path d="M380 224 H435 V327 H485" class="line" marker-end="url(#a)"/>
+  <rect x="485" y="286" width="150" height="82" rx="16" class="box"/>
+  <text x="560" y="320" text-anchor="middle" class="t mid">耦合电容</text><text x="560" y="349" text-anchor="middle" class="t small">隔直</text>
+  <path d="M635 327 H685" class="line" marker-end="url(#a)"/>
+  <rect x="685" y="286" width="135" height="82" rx="16" class="box"/>
+  <text x="752" y="334" text-anchor="middle" class="t mid">滤波器</text>
+  <path d="M820 327 H870" class="line" marker-end="url(#a)"/>
+  <rect x="870" y="286" width="150" height="82" rx="16" class="box"/>
+  <text x="945" y="320" text-anchor="middle" class="t mid">耦合电容</text><text x="945" y="349" text-anchor="middle" class="t small">SMA 输出</text>
+  <path d="M1020 327 H1065" class="line" marker-end="url(#a)"/>
+  <rect x="1065" y="278" width="120" height="98" rx="16" class="blue"/>
+  <text x="1125" y="313" text-anchor="middle" class="t mid">53100A</text><text x="1125" y="342" text-anchor="middle" class="t small">双外接参考</text>
+  <rect x="850" y="397" width="170" height="48" rx="15" class="future"/>
+  <text x="935" y="428" text-anchor="middle" class="t small">下一版考虑增加 LNA</text>
+  <path d="M935 397 V370" class="line" marker-end="url(#a)"/>
+  <text x="610" y="204" text-anchor="middle" class="t small">比较器支路的隔离、端口匹配和数字干扰，可能反向影响模拟输出支路</text>
+</svg>

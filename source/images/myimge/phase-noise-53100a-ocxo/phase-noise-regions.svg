@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="620" viewBox="0 0 1120 620">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff8fb"/>
+      <stop offset="1" stop-color="#f4f7ff"/>
+    </linearGradient>
+    <style>
+      .t{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#263247}
+      .small{font-size:20px}.mid{font-size:23px;font-weight:600}.title{font-size:30px;font-weight:700}
+      .axis{stroke:#516075;stroke-width:2}.grid{stroke:#d9dfeb;stroke-width:1}.curve{fill:none;stroke:#d94f86;stroke-width:5}
+    </style>
+  </defs>
+  <rect width="1120" height="620" rx="26" fill="url(#bg)"/>
+  <text x="560" y="48" text-anchor="middle" class="t title">振荡器相位噪声的典型幂律区域（示意）</text>
+  <line x1="100" y1="510" x2="1050" y2="510" class="axis"/>
+  <line x1="100" y1="510" x2="100" y2="95" class="axis"/>
+  <text x="575" y="575" text-anchor="middle" class="t mid">载波偏移频率 Δf（对数坐标）</text>
+  <text x="30" y="300" transform="rotate(-90 30 300)" text-anchor="middle" class="t mid">L(Δf) / dBc·Hz⁻¹</text>
+  <g class="grid">
+    <line x1="285" y1="95" x2="285" y2="510"/><line x1="475" y1="95" x2="475" y2="510"/>
+    <line x1="665" y1="95" x2="665" y2="510"/><line x1="855" y1="95" x2="855" y2="510"/>
+  </g>
+  <polyline points="120,120 285,275 475,390 665,455 855,490 1030,490" class="curve"/>
+  <g class="t small" text-anchor="middle">
+    <text x="200" y="175">f⁻⁴</text><text x="200" y="204">随机游走频率噪声</text>
+    <text x="380" y="290">f⁻³</text><text x="380" y="319">闪烁频率噪声</text>
+    <text x="570" y="385">f⁻²</text><text x="570" y="414">白频率噪声</text>
+    <text x="760" y="445">f⁻¹</text><text x="760" y="474">闪烁相位噪声</text>
+    <text x="950" y="445">f⁰</text><text x="950" y="474">白相位噪声</text>
+  </g>
+  <g class="t small">
+    <text x="125" y="545">近载波</text><text x="970" y="545">远离载波</text>
+  </g>
+  <rect x="108" y="82" width="415" height="34" rx="17" fill="#fff0f6"/>
+  <text x="315" y="106" text-anchor="middle" class="t small">漂移、晶体、调谐端和低频器件噪声更敏感</text>
+  <rect x="655" y="82" width="387" height="34" rx="17" fill="#eef3ff"/>
+  <text x="848" y="106" text-anchor="middle" class="t small">载波功率、热噪声和后级附加噪声更敏感</text>
+</svg>
