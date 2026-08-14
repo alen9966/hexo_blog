@@ -13,7 +13,7 @@ tags:
 categories:
   - 测试与测量
 description: 承接 100 MHz OCXO 输出双负载法测试，整理示波器 1 MΩ 输入阻抗的 R/C 模型、无源 10× 探头的分压与补偿、50 Ω 端接背后的功率匹配与反射终止，以及同一条时钟链路在三种接入方式下读数差异的来源。
-cover: /images/myimge/scope-probe-loading/wallhaven-l3qz1v-scope.jpg
+cover: /images/myimge/scope-probe-loading/wallhaven-y8v9dk-scope-cover.jpg
 author: Alen
 authorLink: https://github.com/alen9966
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。
@@ -50,7 +50,7 @@ $$
 
 把这个模型画出来，和信号源侧的戴维南等效 `(Vs, Zout)` 接到一起，就得到下面的输入级关系。
 
-![示波器 1 MΩ 档的 R/C 输入模型与 DUT 戴维南信号源的连接关系](/images/myimge/scope-probe-loading/scope-input-r-c-model.svg)
+![示波器 1 MΩ 档的 R/C 输入模型与 DUT 戴维南信号源的连接关系：戴维南源（Vs + Zout）经过 SMA/同轴接到示波器的 Rin=1 MΩ 与 Cin=10 pF 并联输入，示波器读数 Vscope 是 Zin 与 Zout 分压后的结果](/images/myimge/scope-probe-loading/scope-input-r-c-model.png)
 
 示波器看到的输入电压 `Vscope` 不是理想的 `Vs`，而是经过 `Zout` 和 `Zin(ω)` 串联分压后的结果：
 
@@ -76,7 +76,7 @@ $$
 
 最常见的无源探头档位是 `1×` 和 `10×`。`1×` 相当于一根同轴延长线直接接到前面说的示波器输入上，示波器面板上的垂直刻度直接对应实际电压；`10×` 则是在探头尖端内部串入一个 `9 MΩ` 电阻，并并联一个可调补偿电容 `Ctip`，让整条链路形成一个双 RC 的分压网络。
 
-![无源 10× 探头与示波器 1 MΩ 输入形成的双 RC 补偿分压网络](/images/myimge/scope-probe-loading/passive-10x-probe-schematic.svg)
+![无源 10× 探头与示波器 1 MΩ 输入形成的双 RC 补偿分压网络：Tip/GND 夹进入探头内部的 Rtip=9 MΩ || Ctip，经过 BNC 同轴线缆接到示波器 Rin=1 MΩ || Cin=10 pF；满足 Rtip·Ctip = Rin·Cin 时分压比平坦到 1/10](/images/myimge/scope-probe-loading/passive-10x-probe-schematic.png)
 
 把探头侧写成 `(Rtip, Ctip)`、示波器侧写成 `(Rin, Cin)`，两者串联后接信号源 `Vs`。中点电压 `Vscope` 与 `Vs` 的比值就是：
 
