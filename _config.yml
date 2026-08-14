@@ -99,5 +99,5 @@ markdown_it_plus:
 # Deployment
 deploy:
   type: git
-  repository: git@github.com:alen9966/alen9966.github.io.git
+  repository: https://github.com/alen9966/alen9966.github.io.git
   branch: main
