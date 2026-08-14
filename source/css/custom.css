@@ -18,10 +18,8 @@ body {
   color: #274867;
   background:
     linear-gradient(180deg, rgba(22, 119, 255, 0.05), transparent 22%),
-    linear-gradient(90deg, rgba(22, 50, 79, 0.03) 1px, transparent 1px),
-    linear-gradient(rgba(22, 50, 79, 0.03) 1px, transparent 1px),
     #f5f8fc;
-  background-size: auto, 28px 28px, 28px 28px, auto;
+  background-attachment: fixed;
 }
 
 p {
@@ -37,9 +35,22 @@ p {
 .post-title h3,
 .button-normal,
 .top-social_v2 li,
-.focusinfo .header-tou img,
 .site-title a {
-  transition: all 0.24s ease;
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    background-color 0.24s ease,
+    color 0.24s ease,
+    opacity 0.24s ease;
+  will-change: transform;
+}
+
+.focusinfo .header-tou img {
+  transition:
+    transform 0.24s ease,
+    box-shadow 0.24s ease,
+    border-color 0.24s ease;
+  will-change: transform;
 }
 
 .notice,
@@ -499,4 +510,57 @@ span.ar-circle,
   .single-center .single-header h1.entry-title { font-size: 1.55rem !important; }
   .post-item.post-301 { margin: 20px 12px 0; padding: 28px 22px; }
   .archive-date { display: block; min-width: 0; font-size: .82rem; }
+}
+
+/* =========================================
+   Performance Optimizations
+   ========================================= */
+
+/* 减少动画偏好支持 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto !important; }
+}
+
+/* 移动端禁用高成本的毛玻璃效果 */
+@media (max-width: 860px) {
+  .focusinfo,
+  .site-top {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .focusinfo {
+    background: rgba(6, 20, 38, 0.78);
+  }
+  .site-top {
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* 列表内容虚拟化优化 */
+.post-list-thumb,
+.post-item,
+.top-feature,
+.notice,
+.author-profile {
+  content-visibility: auto;
+  contain: layout paint style;
+}
+
+/* Hover 优化 - 提前提升合成层 */
+.post-list-thumb,
+.top-feature,
+.notice,
+.author-profile,
+#pagination a,
+.button-normal {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }

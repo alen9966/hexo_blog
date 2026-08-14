@@ -14,10 +14,10 @@ html {
 
 body {
   background:
-    radial-gradient(circle at top left, rgba(240, 108, 141, 0.12), transparent 28%),
-    radial-gradient(circle at top right, rgba(119, 184, 255, 0.12), transparent 32%),
-    radial-gradient(circle at bottom left, rgba(105, 210, 176, 0.1), transparent 24%),
-    linear-gradient(180deg, #fffafc 0%, #f7f9ff 42%, #fffefc 100%);
+    radial-gradient(circle at top left, rgba(240, 108, 141, 0.08), transparent 35%),
+    radial-gradient(circle at top right, rgba(119, 184, 255, 0.08), transparent 40%),
+    linear-gradient(180deg, #fffafc 0%, #f7f9ff 50%, #fffefc 100%);
+  background-attachment: fixed;
 }
 
 #header::before {
@@ -94,7 +94,10 @@ body {
   font-weight: 700;
   letter-spacing: 0.08em;
   background: transparent;
-  transition: all 0.25s ease;
+  transition:
+    background-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 .main-nav-link-wrap:hover .main-nav-link {
@@ -113,7 +116,12 @@ body {
   border-radius: 50%;
   color: #8f6e8c;
   background: rgba(240, 108, 141, 0.08);
-  transition: all 0.25s ease;
+  transition:
+    background-color 0.22s ease,
+    color 0.22s ease,
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+  will-change: transform;
 }
 
 #sub-nav .nav-icon:hover {
@@ -158,8 +166,10 @@ body {
 .home-notes__aside-card,
 .widget-wrap,
 .post-wrap {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .home-purpose__intro,
@@ -309,7 +319,10 @@ body {
   border-radius: 26px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(252, 249, 255, 0.92) 100%);
   box-shadow: 0 16px 34px rgba(96, 79, 116, 0.08);
-  transition: all 0.25s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+  will-change: transform;
 }
 
 .home-purpose__card::before {
@@ -385,11 +398,14 @@ body {
   border-radius: 28px !important;
   overflow: hidden;
   box-shadow: 0 18px 42px rgba(96, 79, 116, 0.14);
-  transition: all 0.25s ease !important;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease !important;
+  will-change: transform;
 }
 
 .post-categories-wrap:hover {
-  transform: translateY(-6px) scale(1.01);
+  transform: translateY(-6px);
 }
 
 .post-categories-cover::after {
@@ -438,7 +454,10 @@ body {
 
 .home-notes__aside-card {
   padding: 24px;
-  transition: all 0.25s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+  will-change: transform;
 }
 
 .home-notes__aside-card:hover {
@@ -484,7 +503,11 @@ body {
   border-radius: 30px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 248, 251, 0.92) 100%);
   box-shadow: var(--sakura-shadow);
-  transition: all 0.25s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+  will-change: transform;
+  contain: layout paint style;
 }
 
 .post-wrapper:hover .post-wrap {
@@ -537,7 +560,7 @@ body {
   font-weight: 600;
   white-space: normal;
   line-height: 1.45;
-  transition: all 0.25s ease;
+  transition: color 0.22s ease;
 }
 
 .post-wrapper:hover .post-title {
@@ -664,7 +687,11 @@ body {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.84);
   box-shadow: 0 10px 24px rgba(96, 79, 116, 0.08);
-  transition: all 0.25s ease;
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease,
+    box-shadow 0.22s ease;
+  will-change: transform;
 }
 
 .article-category-link {
@@ -746,7 +773,11 @@ body {
   border-radius: 28px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(250, 246, 255, 0.92) 100%);
   box-shadow: var(--sakura-shadow);
-  transition: all 0.25s ease;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+  will-change: transform;
+  contain: layout paint style;
 }
 
 .widget-wrap:hover {
@@ -776,26 +807,18 @@ body {
 }
 
 .sidebar-author img {
-  animation: sakura-avatar-pulse 4.6s ease-in-out infinite;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.sidebar-author:hover img {
+  transform: scale(1.03);
 }
 
 .sidebar-state {
   margin-top: 18px;
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.7);
-}
-
-@keyframes sakura-avatar-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(1.03);
-    opacity: 0.92;
-  }
 }
 
 [data-theme="dark"] .home-purpose__lead,
@@ -893,4 +916,80 @@ body {
   #article-nav {
     grid-template-columns: 1fr;
   }
+}
+
+/* =========================================
+   Performance Optimizations
+   ========================================= */
+
+/* 尊重用户减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 长列表渲染优化 - 只渲染视口内内容 */
+.post-wrapper,
+#archives .al_post_list li,
+.widget-wrap li {
+  content-visibility: auto;
+  contain-intrinsic-size: 260px 100%;
+}
+
+/* 文章卡片提升合成层 */
+.post-wrap,
+.home-purpose__card,
+.home-notes__aside-card,
+.widget-wrap {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* 禁用移动端的模糊毛玻璃效果，减少 GPU 压力 */
+@media (max-width: 900px) {
+  .home-purpose__intro,
+  .home-purpose__summary,
+  .home-notes__panel,
+  .home-notes__aside-card,
+  .widget-wrap,
+  .post-wrap,
+  .article-inner,
+  #comments,
+  #article-nav .article-nav-link-wrap,
+  .sidebar-author {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+/* 文章内容排版优化 - 减少重排 */
+.article-entry {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* 图片懒加载优化 */
+img {
+  content-visibility: auto;
+}
+
+/* 减少 shadow 重绘 - 提升到合成层 */
+.notice,
+.top-feature,
+.post-list-thumb,
+.author-profile {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }

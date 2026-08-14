@@ -115,18 +115,36 @@ window.throttle = (func, limit) => {
   );
 
   let oldScrollTop = 0;
-  document.addEventListener("scroll", () => {
+  let rafScheduled = false;
+  const onScroll = () => {
     let scrollTop =
       document.documentElement.scrollTop || document.body.scrollTop;
     const diffY = scrollTop - oldScrollTop;
     window.diffY = diffY;
     oldScrollTop = scrollTop;
+    const nav = _$("#header-nav");
+    if (!nav) return;
     if (diffY < 0) {
-      _$("#header-nav").classList.remove("header-nav-hidden");
+      nav.classList.remove("header-nav-hidden");
     } else {
-      _$("#header-nav").classList.add("header-nav-hidden");
+      if (scrollTop > 120) {
+        nav.classList.add("header-nav-hidden");
+      }
     }
-  });
+  };
+  document.addEventListener(
+    "scroll",
+    () => {
+      if (!rafScheduled) {
+        rafScheduled = true;
+        requestAnimationFrame(() => {
+          onScroll();
+          rafScheduled = false;
+        });
+      }
+    },
+    { passive: true }
+  );
 
   if (window.Pace) {
     Pace.on("done", () => {
