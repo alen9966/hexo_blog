@@ -10,6 +10,7 @@
   git pull origin main
   ```
 - `main` 上的 push 会由 GitHub Actions 自动部署到网站；一般不必再要求本机 `npx hexo deploy`。本机仍可用 `npx hexo generate` / `npx hexo server` 预览。
+- Agent 写作与 Git 流程见 `.cursor/skills/hexo-blog-writing/` 与 `.cursor/skills/hexo-github-sync/`。
 
 ## 博客图片来源与风格
 
