@@ -1,0 +1,46 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install and build
+        run: |
+          npm ci
+          npx hexo clean
+          npx hexo generate
+
+      - name: Publish to alen9966.github.io
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${DEPLOY_TOKEN:-}" ]; then
+            echo "Missing DEPLOY_TOKEN secret; skip pushing to alen9966/alen9966.github.io"
+            echo "Add a PAT with contents:write on alen9966/alen9966.github.io as DEPLOY_TOKEN."
+            exit 0
+          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          cd public
+          git init
+          git checkout -B main
+          git add -A
+          git commit -m "Site updated: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          git push --force "https://x-access-token:${DEPLOY_TOKEN}@github.com/alen9966/alen9966.github.io.git" HEAD:main
