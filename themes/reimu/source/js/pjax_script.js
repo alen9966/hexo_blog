@@ -205,10 +205,12 @@ _$$(".sidebar-common-btn").forEach((element) => {
 // lazyload
 _$$(".article-entry img").forEach((element) => {
   if (element.classList.contains("lazyload")) return;
+  const currentSrc = element.getAttribute("src");
+  if (!currentSrc) return;
   element.classList.add("lazyload");
-  element.setAttribute("data-src", element.src);
+  element.setAttribute("data-src", currentSrc);
   element.setAttribute("data-sizes", "auto");
-  element.removeAttribute("src");
+  // Keep src so images still render if lazysizes never loads.
 });
 
 // to top

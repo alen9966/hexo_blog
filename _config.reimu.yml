@@ -128,6 +128,24 @@ internal_theme:
 injector:
   head_end:
     - <link rel="stylesheet" href="/css/site-home.css">
+  body_end:
+    - <script src="/js/lazyload-fallback.js"></script>
+
+vendor:
+  js:
+    lazysizes:
+      src: /js/vendor/lazysizes.min.js
+      integrity:
+    clipboard:
+      src: /js/vendor/clipboard.min.js
+      integrity:
+    typed:
+      src: /js/vendor/typed.umd.js
+      integrity:
+    mathjax:
+      src: https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js
+      integrity:
+
 math:
   enable: true
   katex:

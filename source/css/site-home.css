@@ -894,3 +894,12 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Show images even if lazysizes never marks them as lazyloaded. */
+.article-entry img,
+.post-link img,
+.sidebar-author img,
+#article-nav img,
+.article-gallery img {
+  opacity: 1;
+}
