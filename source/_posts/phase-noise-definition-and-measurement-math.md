@@ -14,13 +14,13 @@ description: 从带 φ(t) 的正弦波开始，给出 ℒ(f)、Sφ(f)、阿伦�
 author: Alen
 authorLink: https://github.com/alen9966
 authorAbout: 从原理图到实测波形，记录硬件设计中的选择、失误与验证。
+banner: /images/myimge/phase-noise-basics/wallhaven-yqg6r7-banner.jpg
+cover: /images/myimge/phase-noise-basics/wallhaven-6lp3o6-cover.jpg
 ---
 
-> **关于图与数据**：文中 11 张图为 MATLAB 理论仿真，对应脚本
-> `matlab/phase-noise-basics/generate_phase_noise_figures.m`。
-> 当前本机没有 MATLAB 运行环境，正文先按目标路径引用图片，
-> 在有 MATLAB 的机器上执行一次脚本即可把 11 张 PNG 导出到
-> `source/images/myimge/phase-noise-basics/`。
+> **关于图与数据**：文中 11 张图为 MATLAB 理论仿真，由脚本
+> `matlab/phase-noise-basics/generate_phase_noise_figures.m`
+> 导出到 `source/images/myimge/phase-noise-basics/`。曲线用于说明定义与测量模型，不是硬件实测。
 
 这篇专注原理、公式和测量模型，**不讨论某一只具体 OCXO 的实测结果**——那些已经写在《[从近端噪声到远端噪声：用 53100A 测量 100 MHz OCXO 相位噪声](/2026/08/12/phase-noise-53100a-100mhz-ocxo/)》里。本文的目标是回答：看到一个 `-120 dBc/Hz @ 10 kHz`，它在数学上到底指什么；以及同一只晶振换一台仪器读数为什么不同，什么时候应该信谁。
 
@@ -352,3 +352,9 @@ $$
 4. 同样 DUT、不同仪器读数不同，首先看三件事：**互相关平均次数 M 是否一致、内参考源谁更干净、校准有没有做过。** 不是"谁的仪器更好"，而是"哪条曲线已经越过了参考源的天花板、真正读到 DUT 本身"。
 
 正式操作、参数、连接和一次 100 MHz OCXO 的完整实测记录见姊妹篇：《[从近端噪声到远端噪声：用 53100A 测量 100 MHz OCXO 相位噪声](/2026/08/12/phase-noise-53100a-100mhz-ocxo/)》。
+
+## 图片来源
+
+- Banner：[Wallhaven yqg6r7](https://wallhaven.cc/w/yqg6r7)
+- Cover：[Wallhaven 6lp3o6](https://wallhaven.cc/w/6lp3o6)
+- 正文曲线图：`matlab/phase-noise-basics/generate_phase_noise_figures.m`（理论仿真）
