@@ -1,5 +1,16 @@
 # 博客项目约定
 
+## 仓库与本地同步
+
+- GitHub 源码仓库：`alen9966/hexo_blog`；Pages 部署仓库：`alen9966/alen9966.github.io`（由 Actions 自动推送）。
+- 作者本机工作目录：`F:\my_blog`（对应 `hexo_blog`）。
+- 云端 Agent 只能改 GitHub，不能直接写本机 `F:\my_blog`。每次把改动 push 到 `hexo_blog` 的 `main` 后，必须在回复里提醒作者在本机执行：
+  ```powershell
+  cd F:\my_blog
+  git pull origin main
+  ```
+- `main` 上的 push 会由 GitHub Actions 自动部署到网站；一般不必再要求本机 `npx hexo deploy`。本机仍可用 `npx hexo generate` / `npx hexo server` 预览。
+
 ## 博客图片来源与风格
 
 - 默认情况下，所有新增博客封面、背景和装饰图片只从 [Wallhaven](https://wallhaven.cc/) 选取，并优先使用粉色或浅暖色调的动漫图片。除非用户明确指定其他来源，或文章需要使用与技术内容直接相关的原理图、实测截图、数据手册截图和原创技术图，不从其他图片网站寻找素材。
